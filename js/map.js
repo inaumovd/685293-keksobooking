@@ -64,27 +64,27 @@ var getItems = function (quantity) {
     var x = getRandomInt(0, blockMap.offsetWidth) + PIN_WIDTH / 2;
     var y = getRandomInt(130, 630) + PIN_HEIGHT;
     var item = {
-          autor: {
-            avatar: 'img/avatars/user0' + (i + 1) + '.png'
-          },
-          offer: {
-            title: TITLES[i],
-            address: x +', '+ y,
-            price: getRandomInt(1000, 1000000),
-            type: getRandomItem(TYPES),
-            rooms: getRandomInt(1, 5),
-            guests: getRandomInt(1, 10),
-            checkin: getRandomItem(TIMES),
-            checkout: getRandomItem(TIMES),
-            features: FEATURES.slice(getRandomInt(0, FEATURES.length - 1)),
-            description: '',
-            photos: PHOTOS.slice().sort(randomCompare)
-          },
-          location: {
-            x: x,
-            y: y
-          }
-        };
+      autor: {
+        avatar: 'img/avatars/user0' + (i + 1) + '.png'
+      },
+      offer: {
+        title: TITLES[i],
+        address: x + ', ' + y,
+        price: getRandomInt(1000, 1000000),
+        type: getRandomItem(TYPES),
+        rooms: getRandomInt(1, 5),
+        guests: getRandomInt(1, 10),
+        checkin: getRandomItem(TIMES),
+        checkout: getRandomItem(TIMES),
+        features: FEATURES.slice(getRandomInt(0, FEATURES.length - 1)),
+        description: '',
+        photos: PHOTOS.slice().sort(randomCompare)
+      },
+      location: {
+        x: x,
+        y: y
+      }
+    };
     itemsList[i] = item;
   }
   return itemsList;
@@ -134,8 +134,6 @@ var getPictures = function (pictures) {
 
 var renderAd = function (item) {
   var adItem = mapAdTemplate.cloneNode(true);
-  var photosArea = mapAdTemplate.querySelector('.popup__photos')
-  var featuresArea = mapAdTemplate.querySelector('.popup__features')
 
   adItem.querySelector('.popup__title').textContent = item.offer.title;
   adItem.querySelector('.popup__text--address').textContent = item.offer.address;
@@ -167,7 +165,7 @@ var renderAd = function (item) {
   return adItem;
 };
 
-var pins = getItems(8);
+pins = getItems(8);
 appendPins(pins);
 adBlock.appendChild(renderAd(pins[0]));
 
