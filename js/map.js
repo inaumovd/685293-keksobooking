@@ -46,13 +46,18 @@ var mapFilters = document.querySelector('.map__filters-container');
 var mainPin = document.querySelector('.map__pin--main');
 var adForm = document.querySelector('.ad-form');
 var addressInput = document.querySelector('#address');
-var inputs = document.querySelectorAll('input');
+var fieldsets = document.querySelectorAll('fieldset');
+// var inputs = document.querySelectorAll('input');
 var currentAd;
 var pins = [];
 var PIN_WIDTH = 50;
 var PIN_HEIGHT = 70;
 // var ENTER_KEYCODE = 13;
 var ESC_KEYCODE = 27;
+var MAIN_PIN_WIDTH = 65;
+var MAIN_PIN_HEIGHT = 87;
+var xCoordinate = parseInt(mainPin.style.left, 10) + MAIN_PIN_WIDTH / 2;
+var yCoordinate = parseInt(mainPin.style.top, 10) + MAIN_PIN_HEIGHT;
 
 var getRandomInt = function (min, max) {
   return Math.round(Math.random() * (max - min)) + min;
@@ -163,6 +168,7 @@ var renderAd = function (item) {
 
   var closeAd = function () {
     adItem.parentElement.removeChild(adItem);
+    document.removeEventListener('keydown', onPopupEscPress);
     currentAd = null;
   };
 
@@ -206,23 +212,25 @@ var appendAd = function (item) {
   map.insertBefore(fragment, mapFilters);
 };
 
-var disableInputs = function (data, bool) {
+var disableFieldsets = function (data, bool) {
   for (var i = 0; i < data.length; i++) {
-    inputs[i].disabled = bool;
+    data[i].disabled = bool;
   }
+  addressInput.disabled = true;
 };
 
-var activatePage = function () {
+var setPageActive = function () {
   map.classList.remove('map--faded');
   adForm.classList.remove('ad-form--disabled');
-  disableInputs(inputs, false);
+  disableFieldsets(fieldsets, false);
 };
 
-disableInputs(inputs, true);
-addressInput.value = parseInt(mainPin.style.left, 10) + ', ' + parseInt(mainPin.style.top, 10);
+disableFieldsets(fieldsets, true);
+
+addressInput.value = xCoordinate + ', ' + yCoordinate;
 
 mainPin.addEventListener('mouseup', function (evt) {
-  activatePage();
+  setPageActive();
   pins = getItemsList(8);
   appendPins(pins);
   addressInput.value = evt.clientX + ', ' + evt.clientY;
