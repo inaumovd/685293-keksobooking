@@ -210,7 +210,7 @@ var activatePage = function () {
 disableInputs(inputs, true);
 addressInput.value = parseInt(mainPin.style.left, 10) + ', ' + parseInt(mainPin.style.top, 10);
 
-mainPin.addEventListener('mouseup', function (evt) {
+mainPin.addEventListener('mouseup', function () {
   activatePage();
   pins = getItemsList(8);
   appendPins(pins);
