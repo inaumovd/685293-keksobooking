@@ -47,6 +47,7 @@ var mainPin = document.querySelector('.map__pin--main');
 var adForm = document.querySelector('.ad-form');
 var addressInput = document.querySelector('#address');
 var inputs = document.querySelectorAll('input');
+var currentAd;
 var pins = [];
 var PIN_WIDTH = 50;
 var PIN_HEIGHT = 70;
@@ -103,8 +104,8 @@ var renderMapPin = function (item) {
   var mapPin = mapPinTemplate.cloneNode(true);
 
   mapPin.addEventListener('click', function () {
-    if (currentItem) {
-      currentItem.parentElement.removeChild(currentItem);
+    if (currentAd) {
+      currentAd.parentElement.removeChild(currentAd);
     }
     appendAd(item);
   });
@@ -148,15 +149,13 @@ var getPictures = function (pictures) {
   return fragment;
 };
 
-var currentItem;
-
 var renderAd = function (item) {
   var adItem = mapAdTemplate.cloneNode(true);
   var closeBtn = adItem.querySelector('.popup__close');
 
   closeBtn.addEventListener('click', function () {
     adItem.parentElement.removeChild(adItem);
-    currentItem = null;
+    currentAd = null;
   });
 
   adItem.querySelector('.popup__title').textContent = item.offer.title;
@@ -186,7 +185,7 @@ var renderAd = function (item) {
   newFeatures.appendChild(getFeatures(item.offer.features));
   adItem.replaceChild(newFeatures, features);
 
-  currentItem = adItem;
+  currentAd = adItem;
   return adItem;
 };
 
