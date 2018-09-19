@@ -40,8 +40,9 @@ var mapPinTemplate = document.querySelector('#pin')
 var mapAdTemplate = document.querySelector('#card')
   .content
   .querySelector('.map__card');
-var blockMap = document.querySelector('.map__pins');
-var adBlock = document.querySelector('.map');
+var pinsMap = document.querySelector('.map__pins');
+var map = document.querySelector('.map');
+var mapFilters = document.querySelector('.map__filters-container');
 var pins = [];
 var PIN_WIDTH = 50;
 var PIN_HEIGHT = 70;
@@ -51,7 +52,7 @@ var getRandomInt = function (min, max) {
 };
 
 var getRandomItem = function (items) {
-  return items[Math.round(Math.random() * (items.length - 1))];
+  return getRandomInt(0, items.length - 1);
 };
 
 var randomCompare = function () {
@@ -61,8 +62,8 @@ var randomCompare = function () {
 var getItems = function (quantity) {
   var itemsList = [];
   for (var i = 0; i < quantity; i++) {
-    var x = getRandomInt(0, blockMap.offsetWidth) + PIN_WIDTH / 2;
-    var y = getRandomInt(130, 630) + PIN_HEIGHT;
+    var x = getRandomInt(0, pinsMap.offsetWidth);
+    var y = getRandomInt(130, 630);
     var item = {
       autor: {
         avatar: 'img/avatars/user0' + (i + 1) + '.png'
@@ -90,22 +91,22 @@ var getItems = function (quantity) {
   return itemsList;
 };
 
-var renderMapItem = function (item) {
-  var mapItem = mapPinTemplate.cloneNode(true);
+var renderMapPin = function (item) {
+  var mapPin = mapPinTemplate.cloneNode(true);
 
-  mapItem.style = 'left: ' + item.location.x + 'px; top: ' + item.location.y + 'px;';
-  mapItem.querySelector('img').src = item.autor.avatar;
-  mapItem.querySelector('img').alt = item.offer.title;
+  mapPin.style = 'left: ' + (item.location.x + PIN_WIDTH / 2) + 'px; top: ' + (item.location.y + PIN_HEIGHT) + 'px;';
+  mapPin.querySelector('img').src = item.autor.avatar;
+  mapPin.querySelector('img').alt = item.offer.title;
 
-  return mapItem;
+  return mapPin;
 };
 
 var appendPins = function (items) {
   var fragment = document.createDocumentFragment();
   for (var i = 0; i < items.length; i++) {
-    fragment.appendChild(renderMapItem(items[i]));
+    fragment.appendChild(renderMapPin(items[i]));
   }
-  blockMap.appendChild(fragment);
+  pinsMap.appendChild(fragment);
 };
 
 var getFeatures = function (features) {
@@ -167,6 +168,6 @@ var renderAd = function (item) {
 
 pins = getItems(8);
 appendPins(pins);
-adBlock.appendChild(renderAd(pins[0]));
+map.insertBefore(renderAd(pins[0]), mapFilters);
 
-adBlock.classList.remove('map--faded');
+map.classList.remove('map--faded');
