@@ -174,7 +174,7 @@ var appendAd = function (item) {
   var fragment = document.createDocumentFragment();
   fragment.appendChild(renderAd(item));
   map.insertBefore(fragment, mapFilters);
-}
+};
 
 pins = getItemsList(8);
 appendPins(pins);
