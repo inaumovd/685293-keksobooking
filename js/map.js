@@ -51,6 +51,8 @@ var currentAd;
 var pins = [];
 var PIN_WIDTH = 50;
 var PIN_HEIGHT = 70;
+var ENTER_KEYCODE = 13;
+var ESC_KEYCODE = 27;
 
 var getRandomInt = function (min, max) {
   return Math.round(Math.random() * (max - min)) + min;
@@ -153,10 +155,19 @@ var renderAd = function (item) {
   var adItem = mapAdTemplate.cloneNode(true);
   var closeBtn = adItem.querySelector('.popup__close');
 
-  closeBtn.addEventListener('click', function () {
+  var onPopupEscPress = function (evt) {
+    if (evt.keyCode === ESC_KEYCODE) {
+      closeAd();
+    }
+  };
+
+  var closeAd = function () {
     adItem.parentElement.removeChild(adItem);
     currentAd = null;
-  });
+  };
+
+  closeBtn.addEventListener('click', closeAd);
+  document.addEventListener('keydown', onPopupEscPress);
 
   adItem.querySelector('.popup__title').textContent = item.offer.title;
   adItem.querySelector('.popup__text--address').textContent = item.offer.address;
