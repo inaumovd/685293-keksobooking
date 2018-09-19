@@ -59,34 +59,38 @@ var randomCompare = function () {
   return Math.random() - 0.5;
 };
 
-var getItems = function (quantity) {
+var getItem = function (number) {
+  var x = getRandomInt(0, pinsMap.offsetWidth);
+  var y = getRandomInt(130, 630);
+  var item = {
+    autor: {
+      avatar: 'img/avatars/user0' + (number + 1) + '.png'
+    },
+    offer: {
+      title: TITLES[number],
+      address: x + ', ' + y,
+      price: getRandomInt(1000, 1000000),
+      type: getRandomItem(TYPES),
+      rooms: getRandomInt(1, 5),
+      guests: getRandomInt(1, 10),
+      checkin: getRandomItem(TIMES),
+      checkout: getRandomItem(TIMES),
+      features: FEATURES.slice(getRandomInt(0, FEATURES.length - 1)),
+      description: '',
+      photos: PHOTOS.slice().sort(randomCompare)
+    },
+    location: {
+      x: x,
+      y: y
+    }
+  };
+  return item;
+};
+
+var getItemsList = function (quantity) {
   var itemsList = [];
   for (var i = 0; i < quantity; i++) {
-    var x = getRandomInt(0, pinsMap.offsetWidth);
-    var y = getRandomInt(130, 630);
-    var item = {
-      autor: {
-        avatar: 'img/avatars/user0' + (i + 1) + '.png'
-      },
-      offer: {
-        title: TITLES[i],
-        address: x + ', ' + y,
-        price: getRandomInt(1000, 1000000),
-        type: getRandomItem(TYPES),
-        rooms: getRandomInt(1, 5),
-        guests: getRandomInt(1, 10),
-        checkin: getRandomItem(TIMES),
-        checkout: getRandomItem(TIMES),
-        features: FEATURES.slice(getRandomInt(0, FEATURES.length - 1)),
-        description: '',
-        photos: PHOTOS.slice().sort(randomCompare)
-      },
-      location: {
-        x: x,
-        y: y
-      }
-    };
-    itemsList[i] = item;
+    itemsList[i] = getItem(i);
   }
   return itemsList;
 };
@@ -166,7 +170,7 @@ var renderAd = function (item) {
   return adItem;
 };
 
-pins = getItems(8);
+pins = getItemsList(8);
 appendPins(pins);
 map.insertBefore(renderAd(pins[0]), mapFilters);
 
