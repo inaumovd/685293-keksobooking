@@ -52,7 +52,7 @@ var getRandomInt = function (min, max) {
 };
 
 var getRandomItem = function (items) {
-  return getRandomInt(0, items.length - 1);
+  return items[getRandomInt(0, items.length - 1)];
 };
 
 var randomCompare = function () {
