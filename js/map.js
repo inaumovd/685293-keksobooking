@@ -170,8 +170,12 @@ var renderAd = function (item) {
   return adItem;
 };
 
+var appendAd = function (item) {
+  map.insertBefore(renderAd(item), mapFilters);
+}
+
 pins = getItemsList(8);
 appendPins(pins);
-map.insertBefore(renderAd(pins[0]), mapFilters);
+appendAd(pins[0]);
 
 map.classList.remove('map--faded');
