@@ -51,7 +51,7 @@ var currentAd;
 var pins = [];
 var PIN_WIDTH = 50;
 var PIN_HEIGHT = 70;
-var ENTER_KEYCODE = 13;
+// var ENTER_KEYCODE = 13;
 var ESC_KEYCODE = 27;
 
 var getRandomInt = function (min, max) {
