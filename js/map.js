@@ -55,8 +55,6 @@ var fieldsets = document.querySelectorAll('fieldset');
 // var inputs = document.querySelectorAll('input');
 var currentAd;
 var pins = [];
-var xCoordinate = parseInt(mainPin.style.left, 10) + MAIN_PIN_WIDTH / 2;
-var yCoordinate = parseInt(mainPin.style.top, 10) + MAIN_PIN_HEIGHT;
 
 var getRandomInt = function (min, max) {
   return Math.round(Math.random() * (max - min)) + min;
@@ -232,7 +230,7 @@ setDisabledFieldsets(fieldsets, true);
 addressInput.disabled = true;
 addressInput.value = getMainPinCoordinate();
 
-mainPin.addEventListener('mouseup', function (evt) {
+mainPin.addEventListener('mouseup', function () {
   activatePage();
   pins = getItemsList(8);
   appendPins(pins);
