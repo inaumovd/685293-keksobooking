@@ -166,10 +166,6 @@ var getMapCard = function (item) {
   var adItem = mapAdTemplate.cloneNode(true);
   var closeBtn = adItem.querySelector('.popup__close');
 
-  if (currentAd) {
-    currentAd.parentElement.removeChild(currentAd);
-  }
-
   closeBtn.addEventListener('click', closeAd);
   document.addEventListener('keydown', onPopupEscPress);
 
@@ -205,6 +201,10 @@ var getMapCard = function (item) {
 };
 
 var appendAd = function (item) {
+  if (currentAd) {
+    currentAd.parentElement.removeChild(currentAd);
+  }
+
   map.insertBefore(getMapCard(item), mapFilters);
 };
 
