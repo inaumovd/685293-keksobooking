@@ -196,7 +196,6 @@ var getMapCard = function (item) {
   newFeatures.appendChild(getFeatures(item.offer.features));
   adItem.replaceChild(newFeatures, features);
 
-  currentAd = adItem;
   return adItem;
 };
 
@@ -205,7 +204,7 @@ var appendAd = function (item) {
     currentAd.parentElement.removeChild(currentAd);
   }
 
-  map.insertBefore(getMapCard(item), mapFilters);
+  currentAd = map.insertBefore(getMapCard(item), mapFilters);
 };
 
 var setDisabledFieldsets = function (data, bool) {
