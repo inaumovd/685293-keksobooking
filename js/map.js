@@ -33,7 +33,12 @@ var PHOTOS = [
   'http://o0.github.io/assets/images/tokyo/hotel2.jpg',
   'http://o0.github.io/assets/images/tokyo/hotel3.jpg'
 ];
-
+var PIN_WIDTH = 50;
+var PIN_HEIGHT = 70;
+// var ENTER_KEYCODE = 13;
+var ESC_KEYCODE = 27;
+var MAIN_PIN_WIDTH = 65;
+var MAIN_PIN_HEIGHT = 87;
 var mapPinTemplate = document.querySelector('#pin')
   .content
   .querySelector('.map__pin');
@@ -43,9 +48,13 @@ var mapAdTemplate = document.querySelector('#card')
 var pinsMap = document.querySelector('.map__pins');
 var map = document.querySelector('.map');
 var mapFilters = document.querySelector('.map__filters-container');
+var mainPin = document.querySelector('.map__pin--main');
+var adForm = document.querySelector('.ad-form');
+var addressInput = document.querySelector('#address');
+var fieldsets = document.querySelectorAll('fieldset');
+// var inputs = document.querySelectorAll('input');
+var currentAd;
 var pins = [];
-var PIN_WIDTH = 50;
-var PIN_HEIGHT = 70;
 
 var getRandomInt = function (min, max) {
   return Math.round(Math.random() * (max - min)) + min;
@@ -95,8 +104,12 @@ var getItemsList = function (quantity) {
   return itemsList;
 };
 
-var renderMapPin = function (item) {
+var getMapPin = function (item) {
   var mapPin = mapPinTemplate.cloneNode(true);
+
+  mapPin.addEventListener('click', function () {
+    appendAd(item);
+  });
 
   mapPin.style = 'left: ' + (item.location.x + PIN_WIDTH / 2) + 'px; top: ' + (item.location.y + PIN_HEIGHT) + 'px;';
   mapPin.querySelector('img').src = item.autor.avatar;
@@ -108,7 +121,7 @@ var renderMapPin = function (item) {
 var appendPins = function (items) {
   var fragment = document.createDocumentFragment();
   for (var i = 0; i < items.length; i++) {
-    fragment.appendChild(renderMapPin(items[i]));
+    fragment.appendChild(getMapPin(items[i]));
   }
   pinsMap.appendChild(fragment);
 };
@@ -137,8 +150,24 @@ var getPictures = function (pictures) {
   return fragment;
 };
 
-var renderAd = function (item) {
+var onPopupEscPress = function (evt) {
+  if (evt.keyCode === ESC_KEYCODE) {
+    closeAd();
+  }
+};
+
+var closeAd = function () {
+  map.removeChild(document.querySelector('article.map__card'));
+  document.removeEventListener('keydown', onPopupEscPress);
+  currentAd = null;
+};
+
+var getMapCard = function (item) {
   var adItem = mapAdTemplate.cloneNode(true);
+  var closeBtn = adItem.querySelector('.popup__close');
+
+  closeBtn.addEventListener('click', closeAd);
+  document.addEventListener('keydown', onPopupEscPress);
 
   adItem.querySelector('.popup__title').textContent = item.offer.title;
   adItem.querySelector('.popup__text--address').textContent = item.offer.address;
@@ -171,13 +200,38 @@ var renderAd = function (item) {
 };
 
 var appendAd = function (item) {
-  var fragment = document.createDocumentFragment();
-  fragment.appendChild(renderAd(item));
-  map.insertBefore(fragment, mapFilters);
+  if (currentAd) {
+    currentAd.parentElement.removeChild(currentAd);
+  }
+
+  currentAd = map.insertBefore(getMapCard(item), mapFilters);
 };
 
-pins = getItemsList(8);
-appendPins(pins);
-appendAd(pins[0]);
+var setDisabledFieldsets = function (data, bool) {
+  for (var i = 0; i < data.length; i++) {
+    data[i].disabled = bool;
+  }
+};
 
-map.classList.remove('map--faded');
+var activatePage = function () {
+  map.classList.remove('map--faded');
+  adForm.classList.remove('ad-form--disabled');
+  setDisabledFieldsets(fieldsets, false);
+};
+
+var getMainPinCoordinate = function () {
+  var x = mainPin.offsetLeft + MAIN_PIN_WIDTH / 2;
+  var y = mainPin.offsetTop + MAIN_PIN_HEIGHT;
+  return x + ',' + y;
+};
+
+setDisabledFieldsets(fieldsets, true);
+addressInput.disabled = true;
+addressInput.value = getMainPinCoordinate();
+
+mainPin.addEventListener('mouseup', function () {
+  activatePage();
+  pins = getItemsList(8);
+  appendPins(pins);
+  addressInput.value = getMainPinCoordinate();
+});
