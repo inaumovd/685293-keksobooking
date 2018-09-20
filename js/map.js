@@ -33,7 +33,12 @@ var PHOTOS = [
   'http://o0.github.io/assets/images/tokyo/hotel2.jpg',
   'http://o0.github.io/assets/images/tokyo/hotel3.jpg'
 ];
-
+var PIN_WIDTH = 50;
+var PIN_HEIGHT = 70;
+// var ENTER_KEYCODE = 13;
+var ESC_KEYCODE = 27;
+var MAIN_PIN_WIDTH = 65;
+var MAIN_PIN_HEIGHT = 87;
 var mapPinTemplate = document.querySelector('#pin')
   .content
   .querySelector('.map__pin');
@@ -50,12 +55,6 @@ var fieldsets = document.querySelectorAll('fieldset');
 // var inputs = document.querySelectorAll('input');
 var currentAd;
 var pins = [];
-var PIN_WIDTH = 50;
-var PIN_HEIGHT = 70;
-// var ENTER_KEYCODE = 13;
-var ESC_KEYCODE = 27;
-var MAIN_PIN_WIDTH = 65;
-var MAIN_PIN_HEIGHT = 87;
 var xCoordinate = parseInt(mainPin.style.left, 10) + MAIN_PIN_WIDTH / 2;
 var yCoordinate = parseInt(mainPin.style.top, 10) + MAIN_PIN_HEIGHT;
 
@@ -156,21 +155,21 @@ var getPictures = function (pictures) {
   return fragment;
 };
 
-var renderAd = function (item) {
+var onPopupEscPress = function (evt) {
+  if (evt.keyCode === ESC_KEYCODE) {
+    closeAd();
+  }
+};
+
+var closeAd = function () {
+  map.removeChild(document.querySelector('article.map__card'));
+  document.removeEventListener('keydown', onPopupEscPress);
+  currentAd = null;
+};
+
+var getMapCard = function (item) {
   var adItem = mapAdTemplate.cloneNode(true);
   var closeBtn = adItem.querySelector('.popup__close');
-
-  var onPopupEscPress = function (evt) {
-    if (evt.keyCode === ESC_KEYCODE) {
-      closeAd();
-    }
-  };
-
-  var closeAd = function () {
-    adItem.parentElement.removeChild(adItem);
-    document.removeEventListener('keydown', onPopupEscPress);
-    currentAd = null;
-  };
 
   closeBtn.addEventListener('click', closeAd);
   document.addEventListener('keydown', onPopupEscPress);
@@ -207,31 +206,32 @@ var renderAd = function (item) {
 };
 
 var appendAd = function (item) {
-  var fragment = document.createDocumentFragment();
-  fragment.appendChild(renderAd(item));
-  map.insertBefore(fragment, mapFilters);
+  map.insertBefore(getMapCard(item), mapFilters);
 };
 
-var disableFieldsets = function (data, bool) {
+var setDisabledFieldsets = function (data, bool) {
   for (var i = 0; i < data.length; i++) {
     data[i].disabled = bool;
   }
-  addressInput.disabled = true;
 };
 
-var setPageActive = function () {
+var activatePage = function () {
   map.classList.remove('map--faded');
   adForm.classList.remove('ad-form--disabled');
-  disableFieldsets(fieldsets, false);
+  setDisabledFieldsets(fieldsets, false);
 };
 
-disableFieldsets(fieldsets, true);
+var getMainPinCoordinate = function (data) {
+  return (data.clientX + MAIN_PIN_WIDTH / 2) + ', ' + (data.clientY + MAIN_PIN_HEIGHT);
+};
 
+setDisabledFieldsets(fieldsets, true);
+addressInput.disabled = true;
 addressInput.value = xCoordinate + ', ' + yCoordinate;
 
 mainPin.addEventListener('mouseup', function (evt) {
-  setPageActive();
+  activatePage();
   pins = getItemsList(8);
   appendPins(pins);
-  addressInput.value = evt.clientX + ', ' + evt.clientY;
+  addressInput.value = getMainPinCoordinate(evt);
 });
