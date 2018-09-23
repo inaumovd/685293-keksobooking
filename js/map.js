@@ -245,7 +245,7 @@ var updateCapacity = function () {
   var errorMessage;
   var items = capacitySelect.querySelectorAll('option');
   for (var i = 0; i < items.length; i++) {
-    if (roomNumber === 100) {
+    if (roomNumber === '100') {
       items[i].disabled = (items[i].value !== '0');
     } else {
       items[i].disabled = (items[i].value === '0' || items[i].value > roomNumber);
