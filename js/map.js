@@ -293,6 +293,12 @@ timeOut.addEventListener('change', timeOutChangeHandler);
 mainPin.addEventListener('mousedown', function (evt) {
   evt.preventDefault();
 
+  var minX = 0 - MAIN_PIN_WIDTH / 2;
+  var maxX = pinsMap.offsetWidth - MAIN_PIN_WIDTH / 2;
+  var minY = MIN_Y_COORD - MAIN_PIN_HEIGHT;
+  var maxY = MAX_Y_COORD - MAIN_PIN_HEIGHT;
+
+
   var startCoords = {
     x: evt.clientX,
     y: evt.clientY
@@ -314,8 +320,8 @@ mainPin.addEventListener('mousedown', function (evt) {
     var calcXCoord = mainPin.offsetLeft - shift.x;
     var calcYCoord = mainPin.offsetTop - shift.y;
 
-    var nextX = Math.min(Math.max(calcXCoord, 0 - MAIN_PIN_WIDTH / 2), pinsMap.offsetWidth - MAIN_PIN_WIDTH / 2);
-    var nextY = Math.min(Math.max(calcYCoord, MIN_Y_COORD - MAIN_PIN_HEIGHT), MAX_Y_COORD - MAIN_PIN_HEIGHT);
+    var nextX = Math.min(Math.max(calcXCoord, minX), maxX);
+    var nextY = Math.min(Math.max(calcYCoord, minY), maxY);
 
     mainPin.style.left = nextX + 'px';
     mainPin.style.top = nextY + 'px';
