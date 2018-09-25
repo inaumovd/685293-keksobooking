@@ -281,6 +281,10 @@ var deactivatePage = function () {
   isPageActive = false;
 };
 
+var isPageNotActive = function() {
+  return map.classList.contains('map--faded');
+}
+
 roomNumberSelect.addEventListener('focus', function () {
   setDisabledOptions(capacitySelect.querySelectorAll('option'));
 });
@@ -334,15 +338,12 @@ mainPin.addEventListener('mousedown', function (evt) {
   var onMouseUp = function (upEvt) {
     upEvt.preventDefault();
 
+  if (isPageNotActive()) {
     pins = getItemsList(8);
-    if (isPageActive) {
-      isPageActive = !isPageActive;
-    } else {
-      appendPins(pins);
-    }
+    appendPins(pins);
     activatePage();
-    addressInput.value = getMainPinCoordinate();
     updateCapacity();
+  }
 
     document.removeEventListener('mousemove', onMouseMove);
     document.removeEventListener('mouseup', onMouseUp);
