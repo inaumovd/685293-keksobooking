@@ -63,6 +63,7 @@ var capacitySelect = document.querySelector('#capacity');
 // var inputs = document.querySelectorAll('input');
 var currentAd;
 var pins = [];
+var isPageActive;
 
 var getRandomInt = function (min, max) {
   return Math.round(Math.random() * (max - min)) + min;
@@ -225,6 +226,7 @@ var activatePage = function () {
   adForm.classList.remove('ad-form--disabled');
   setDisabledFieldsets(fieldsets, false);
   capacitySelect.value = '1';
+  isPageActive = true;
 };
 
 var getMainPinCoordinate = function () {
@@ -276,6 +278,7 @@ var timeOutChangeHandler = function () {
 var deactivatePage = function () {
   setDisabledFieldsets(fieldsets, true);
   addressInput.value = getMainPinCoordinate();
+  isPageActive = false;
 };
 
 roomNumberSelect.addEventListener('focus', function () {
@@ -331,9 +334,13 @@ mainPin.addEventListener('mousedown', function (evt) {
   var onMouseUp = function (upEvt) {
     upEvt.preventDefault();
 
-    activatePage();
     pins = getItemsList(8);
-    appendPins(pins);
+    if (isPageActive) {
+      isPageActive = !isPageActive;
+    } else {
+      appendPins(pins);
+    }
+    activatePage();
     addressInput.value = getMainPinCoordinate();
     updateCapacity();
 
