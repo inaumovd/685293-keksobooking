@@ -39,6 +39,8 @@ var PIN_HEIGHT = 70;
 var ESC_KEYCODE = 27;
 var MAIN_PIN_WIDTH = 65;
 var MAIN_PIN_HEIGHT = 87;
+var MAX_Y_COORD = 630;
+var MIN_Y_COORD = 130;
 var mapPinTemplate = document.querySelector('#pin')
   .content
   .querySelector('.map__pin');
@@ -76,7 +78,7 @@ var randomCompare = function () {
 
 var getItem = function (number) {
   var x = getRandomInt(0, pinsMap.offsetWidth);
-  var y = getRandomInt(130, 630);
+  var y = getRandomInt(MIN_Y_COORD, MAX_Y_COORD);
   var item = {
     autor: {
       avatar: 'img/avatars/user0' + (number + 1) + '.png'
@@ -116,8 +118,7 @@ var getMapPin = function (item) {
   mapPin.addEventListener('click', function () {
     appendAd(item);
   });
-
-  mapPin.style = 'left: ' + (item.location.x + PIN_WIDTH / 2) + 'px; top: ' + (item.location.y + PIN_HEIGHT) + 'px;';
+  mapPin.style = 'left: ' + (item.location.x - PIN_WIDTH / 2) + 'px; top: ' + (item.location.y - PIN_HEIGHT) + 'px;';
   mapPin.querySelector('img').src = item.autor.avatar;
   mapPin.querySelector('img').alt = item.offer.title;
 
@@ -277,6 +278,10 @@ var deactivatePage = function () {
   addressInput.value = getMainPinCoordinate();
 };
 
+var isPageNotActive = function() {
+  return map.classList.contains('map--faded');
+};
+
 roomNumberSelect.addEventListener('focus', function () {
   setDisabledOptions(capacitySelect.querySelectorAll('option'));
 });
@@ -289,12 +294,61 @@ timeIn.addEventListener('change', timeInChangeHandler);
 
 timeOut.addEventListener('change', timeOutChangeHandler);
 
-mainPin.addEventListener('mouseup', function () {
-  activatePage();
-  pins = getItemsList(8);
-  appendPins(pins);
-  addressInput.value = getMainPinCoordinate();
-  updateCapacity();
+mainPin.addEventListener('mousedown', function (evt) {
+  evt.preventDefault();
+
+  var minX = 0 - MAIN_PIN_WIDTH / 2;
+  var maxX = pinsMap.offsetWidth - MAIN_PIN_WIDTH / 2;
+  var minY = MIN_Y_COORD - MAIN_PIN_HEIGHT;
+  var maxY = MAX_Y_COORD - MAIN_PIN_HEIGHT;
+
+
+  var startCoords = {
+    x: evt.clientX,
+    y: evt.clientY
+  };
+
+  var onMouseMove = function (moveEvt) {
+    moveEvt.preventDefault();
+
+    var shift = {
+      x: startCoords.x - moveEvt.clientX,
+      y: startCoords.y - moveEvt.clientY
+    };
+
+    startCoords = {
+      x: moveEvt.clientX,
+      y: moveEvt.clientY
+    };
+
+    var calcXCoord = mainPin.offsetLeft - shift.x;
+    var calcYCoord = mainPin.offsetTop - shift.y;
+
+    var nextX = Math.min(Math.max(calcXCoord, minX), maxX);
+    var nextY = Math.min(Math.max(calcYCoord, minY), maxY);
+
+    mainPin.style.left = nextX + 'px';
+    mainPin.style.top = nextY + 'px';
+
+  };
+
+  var onMouseUp = function (upEvt) {
+    upEvt.preventDefault();
+
+    if (isPageNotActive()) {
+      pins = getItemsList(8);
+      appendPins(pins);
+      activatePage();
+      updateCapacity();
+    }
+
+    addressInput.value = getMainPinCoordinate();
+
+    document.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseup', onMouseUp);
+  };
+  document.addEventListener('mousemove', onMouseMove);
+  document.addEventListener('mouseup', onMouseUp);
 });
 
 deactivatePage();
