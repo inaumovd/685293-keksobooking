@@ -338,12 +338,12 @@ mainPin.addEventListener('mousedown', function (evt) {
   var onMouseUp = function (upEvt) {
     upEvt.preventDefault();
 
-  if (isPageNotActive()) {
-    pins = getItemsList(8);
-    appendPins(pins);
-    activatePage();
-    updateCapacity();
-  }
+    if (isPageNotActive()) {
+      pins = getItemsList(8);
+      appendPins(pins);
+      activatePage();
+      updateCapacity();
+    }
 
     document.removeEventListener('mousemove', onMouseMove);
     document.removeEventListener('mouseup', onMouseUp);
