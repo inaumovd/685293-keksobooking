@@ -37,7 +37,7 @@
     var closeBtn = adItem.querySelector('.popup__close');
 
     closeBtn.addEventListener('click', closeAd);
-    document.addEventListener('keydown', window.utils.onPopupEscPress);
+    document.addEventListener('keydown', onPopupEscPress);
 
     adItem.querySelector('.popup__title').textContent = item.offer.title;
     adItem.querySelector('.popup__text--address').textContent = item.offer.address;
@@ -79,8 +79,14 @@
 
   var closeAd = function () {
     window.map.map.removeChild(document.querySelector('article.map__card'));
-    document.removeEventListener('keydown', window.utils.onPopupEscPress);
+    document.removeEventListener('keydown', onPopupEscPress);
     currentAd = null;
+  };
+
+  var onPopupEscPress = function (evt) {
+    if (evt.keyCode === window.utils.ESC_KEYCODE) {
+      closeAd();
+    }
   };
 
   window.card = {

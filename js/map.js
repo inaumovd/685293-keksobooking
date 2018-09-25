@@ -33,7 +33,7 @@
     window.form.addressInput.value = getMainPinCoordinate();
   };
 
-  var isPageNotActive = function() {
+  var isPageNotActive = function () {
     return map.classList.contains('map--faded');
   };
 
@@ -101,7 +101,7 @@
 
     pinsMap: pinsMap,
     map: map,
-    mapFilters: mapFilters
+    mapFilters: mapFilters,
   };
 
 })();
