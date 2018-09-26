@@ -32,13 +32,15 @@
     pinsMap.appendChild(fragment);
   };
 
-  var showPins = function (count) {
-    pins = window.data.getItemsList(count);
-    appendPins(pins);
+  pins = window.data.getItemsList(8);
+
+  var show = function (data) {
+    appendPins(data);
   };
 
   window.pin = {
-    showPins: showPins
+    show: show,
+    pins: pins
   };
 
 })();

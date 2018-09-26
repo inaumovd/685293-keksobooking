@@ -40,7 +40,6 @@
   var MIN_PRICE = 1000;
   var MAX_PRICE = 1000000;
 
-
   var getItem = function (number) {
     var x = window.utils.getRandomInt(0, window.map.pinsMap.offsetWidth);
     var y = window.utils.getRandomInt(window.map.MIN_Y_COORD, window.map.MAX_Y_COORD);
@@ -80,6 +79,5 @@
   window.data = {
     getItemsList: getItemsList
   };
-
 
 })();

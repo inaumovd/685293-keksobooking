@@ -17,12 +17,6 @@
     return Math.random() - 0.5;
   };
 
-  var onPopupEscPress = function (evt) {
-    if (evt.keyCode === ESC_KEYCODE) {
-      window.adCard.closeAd();
-    }
-  };
-
   window.utils = {
     // ENTER_KEYCODE: ENTER_KEYCODE,
     ESC_KEYCODE: ESC_KEYCODE,
@@ -30,7 +24,6 @@
     getRandomInt: getRandomInt,
     getRandomItem: getRandomItem,
     randomCompare: randomCompare,
-    onPopupEscPress: onPopupEscPress
   };
 
 })();

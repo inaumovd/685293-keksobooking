@@ -16,14 +16,14 @@
     addressInput.value = data;
   };
 
-  var activateAdForm = function () {
+  var activate = function () {
     adForm.classList.remove('ad-form--disabled');
     setDisabledFieldsets(fieldsets, false);
     capacitySelect.value = '1';
     updateCapacity();
   };
 
-  var deactivateAdForm = function () {
+  var deactivate = function () {
     setDisabledFieldsets(fieldsets, true);
   };
 
@@ -86,13 +86,8 @@
   timeOut.addEventListener('change', timeOutChangeHandler);
 
   window.form = {
-    setDisabledFieldsets: setDisabledFieldsets,
-    fieldsets: fieldsets,
-    capacitySelect: capacitySelect,
-    addressInput: addressInput,
-    updateCapacity: updateCapacity,
-    activateAdForm: activateAdForm,
-    deactivateAdForm: deactivateAdForm,
+    activate: activate,
+    deactivate: deactivate,
     setAddress: setAddress
   };
 
