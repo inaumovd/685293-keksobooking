@@ -37,7 +37,7 @@
     var closeBtn = adItem.querySelector('.popup__close');
 
     closeBtn.addEventListener('click', closeAd);
-    document.addEventListener('keydown', onPopupEscPress);
+    document.addEventListener('keydown', window.utils.onPopupEscPress);
 
     adItem.querySelector('.popup__title').textContent = item.offer.title;
     adItem.querySelector('.popup__text--address').textContent = item.offer.address;
@@ -69,27 +69,23 @@
     return adItem;
   };
 
-  var appendAdCard = function (item) {
+  var appendAd = function (item) {
     if (currentAd) {
       currentAd.parentElement.removeChild(currentAd);
     }
-    window.map.showAd(getMapCard(item));
+    currentAd = window.map.map.insertBefore(getMapCard(item), window.map.mapFilters);
   };
 
   var closeAd = function () {
-    window.map.removeAd(document.querySelector('article.map__card'));
-    document.removeEventListener('keydown', onPopupEscPress);
+    window.map.map.removeChild(document.querySelector('article.map__card'));
+    document.removeEventListener('keydown', window.utils.onPopupEscPress);
     currentAd = null;
   };
 
-  var onPopupEscPress = function (evt) {
-    if (evt.keyCode === window.utils.ESC_KEYCODE) {
-      closeAd();
-    }
-  };
+  window.card = {
+    appendAd: appendAd,
+    closeAd: closeAd
 
-  window.adCard = {
-    appendAdCard: appendAdCard
   };
 
 })();

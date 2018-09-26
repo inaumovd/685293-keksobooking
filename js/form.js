@@ -10,18 +10,7 @@
   var timeIn = document.querySelector('#timein');
   var timeOut = document.querySelector('#timeout');
   var addressInput = document.querySelector('#address');
-  var adForm = document.querySelector('.ad-form');
 
-  var activateAdForm = function () {
-    adForm.classList.remove('ad-form--disabled');
-    setDisabledFieldsets(fieldsets, false);
-    capacitySelect.value = '1';
-  };
-
-  var deactivateAdForm = function () {
-    adForm.classList.add('ad-form--disabled');
-    setDisabledFieldsets(fieldsets, true);
-  };
 
   var setDisabledFieldsets = function (data, bool) {
     for (var i = 0; i < data.length; i++) {
@@ -82,11 +71,11 @@
   timeOut.addEventListener('change', timeOutChangeHandler);
 
   window.form = {
+    setDisabledFieldsets: setDisabledFieldsets,
+    fieldsets: fieldsets,
     capacitySelect: capacitySelect,
     addressInput: addressInput,
-    updateCapacity: updateCapacity,
-    activateAdForm: activateAdForm,
-    deactivateAdForm: deactivateAdForm
+    updateCapacity: updateCapacity
   };
 
 })();

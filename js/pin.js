@@ -14,7 +14,7 @@
     var mapPin = mapPinTemplate.cloneNode(true);
 
     mapPin.addEventListener('click', function () {
-      window.adCard.appendAdCard(item);
+      window.card.appendAd(item);
     });
     mapPin.style = 'left: ' + (item.location.x - PIN_WIDTH / 2) + 'px; top: ' + (item.location.y - PIN_HEIGHT) + 'px;';
     mapPin.querySelector('img').src = item.autor.avatar;
