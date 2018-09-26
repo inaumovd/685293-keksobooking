@@ -19,7 +19,7 @@
 
   var onPopupEscPress = function (evt) {
     if (evt.keyCode === ESC_KEYCODE) {
-      window.card.closeAd();
+      window.adCard.closeAd();
     }
   };
 

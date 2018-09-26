@@ -11,24 +11,23 @@
   var pinsMap = document.querySelector('.map__pins');
   var mapFilters = document.querySelector('.map__filters-container');
   var mainPin = document.querySelector('.map__pin--main');
-  var adForm = document.querySelector('.ad-form');
-  var pins = [];
+  var addressInput = document.querySelector('#address');
+
+
   var activatePage = function () {
     map.classList.remove('map--faded');
-    adForm.classList.remove('ad-form--disabled');
-    window.form.setDisabledFieldsets(window.form.fieldsets, false);
-    window.form.capacitySelect.value = '1';
+    window.form.activateAdForm();
+  };
+
+  var deactivatePage = function () {
+    window.form.deactivateAdForm();
+    addressInput.value = getMainPinCoordinate();
   };
 
   var getMainPinCoordinate = function () {
     var x = mainPin.offsetLeft + MAIN_PIN_WIDTH / 2;
     var y = mainPin.offsetTop + MAIN_PIN_HEIGHT;
     return x + ',' + y;
-  };
-
-  var deactivatePage = function () {
-    window.form.setDisabledFieldsets(window.form.fieldsets, true);
-    window.form.addressInput.value = getMainPinCoordinate();
   };
 
   var isPageNotActive = function () {
@@ -76,13 +75,11 @@
       upEvt.preventDefault();
 
       if (isPageNotActive()) {
-        pins = window.data.getItemsList(8);
-        window.pin.appendPins(pins);
+        window.pin.showPins(8);
         activatePage();
-        window.form.updateCapacity();
       }
 
-      window.form.addressInput.value = getMainPinCoordinate();
+      window.form.setAddress(getMainPinCoordinate());
 
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);

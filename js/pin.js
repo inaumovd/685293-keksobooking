@@ -9,12 +9,13 @@
   var mapPinTemplate = document.querySelector('#pin')
     .content
     .querySelector('.map__pin');
+  var pinsMap = document.querySelector('.map__pins');
 
   var getMapPin = function (item) {
     var mapPin = mapPinTemplate.cloneNode(true);
 
     mapPin.addEventListener('click', function () {
-      window.card.appendAd(item);
+      window.adCard.appendAdCard(item);
     });
     mapPin.style = 'left: ' + (item.location.x - PIN_WIDTH / 2) + 'px; top: ' + (item.location.y - PIN_HEIGHT) + 'px;';
     mapPin.querySelector('img').src = item.autor.avatar;
@@ -28,14 +29,16 @@
     for (var i = 0; i < items.length; i++) {
       fragment.appendChild(getMapPin(items[i]));
     }
-    window.map.pinsMap.appendChild(fragment);
+    pinsMap.appendChild(fragment);
   };
 
-  pins = window.data.getItemsList(8);
+  var showPins = function (count) {
+    pins = window.data.getItemsList(count);
+    appendPins(pins);
+  };
 
   window.pin = {
-    appendPins: appendPins,
-    pins: pins
+    showPins: showPins
   };
 
 })();
