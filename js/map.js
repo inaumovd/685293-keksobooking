@@ -102,8 +102,6 @@
     MIN_Y_COORD: MIN_Y_COORD,
 
     pinsMap: pinsMap,
-    map: map,
-    mapFilters: mapFilters,
     showAd: showAd,
     removeAd: removeAd
   };

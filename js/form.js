@@ -82,8 +82,6 @@
   timeOut.addEventListener('change', timeOutChangeHandler);
 
   window.form = {
-    setDisabledFieldsets: setDisabledFieldsets,
-    fieldsets: fieldsets,
     capacitySelect: capacitySelect,
     addressInput: addressInput,
     updateCapacity: updateCapacity,
