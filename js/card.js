@@ -69,16 +69,15 @@
     return adItem;
   };
 
-  var appendAd = function (item) {
+  var appendAdCard = function (item) {
     if (currentAd) {
       currentAd.parentElement.removeChild(currentAd);
     }
-
-    currentAd = window.map.map.insertBefore(getMapCard(item), window.map.mapFilters);
+    window.map.showAd(getMapCard(item));
   };
 
   var closeAd = function () {
-    window.map.map.removeChild(document.querySelector('article.map__card'));
+    window.map.removeAd(document.querySelector('article.map__card'));
     document.removeEventListener('keydown', onPopupEscPress);
     currentAd = null;
   };
@@ -89,8 +88,8 @@
     }
   };
 
-  window.card = {
-    appendAd: appendAd
+  window.adCard = {
+    appendAdCard: appendAdCard
   };
 
 })();

@@ -4,6 +4,7 @@
 
   var PIN_WIDTH = 50;
   var PIN_HEIGHT = 70;
+  var pins = [];
 
   var mapPinTemplate = document.querySelector('#pin')
     .content
@@ -13,7 +14,7 @@
     var mapPin = mapPinTemplate.cloneNode(true);
 
     mapPin.addEventListener('click', function () {
-      window.card.appendAd(item);
+      window.adCard.appendAdCard(item);
     });
     mapPin.style = 'left: ' + (item.location.x - PIN_WIDTH / 2) + 'px; top: ' + (item.location.y - PIN_HEIGHT) + 'px;';
     mapPin.querySelector('img').src = item.autor.avatar;
@@ -30,8 +31,11 @@
     window.map.pinsMap.appendChild(fragment);
   };
 
+  pins = window.data.getItemsList(8);
+
   window.pin = {
-    appendPins: appendPins
+    appendPins: appendPins,
+    pins: pins
   };
 
 })();
