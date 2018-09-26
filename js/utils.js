@@ -23,7 +23,7 @@
 
     getRandomInt: getRandomInt,
     getRandomItem: getRandomItem,
-    randomCompare: randomCompare,
+    randomCompare: randomCompare
   };
 
 })();
