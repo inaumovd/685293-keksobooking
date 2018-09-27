@@ -38,14 +38,14 @@
   };
 
   var onLoad = function (data) {
-    console.log(data);
+    console.log(data); // данные есть
     pinsData = data;
-    console.log(pinsData);
+    console.log(pinsData); //данные есть
   };
 
   window.backend.load(onLoad, onError);
+  console.log(pinsData); //данных нет
 
-  console.log(pinsData);
   var show = function () {
     appendPins(pinsData);
   };
