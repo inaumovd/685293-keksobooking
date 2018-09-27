@@ -27,13 +27,25 @@
   var appendPins = function (items) {
     var fragment = document.createDocumentFragment();
     for (var i = 0; i < items.length; i++) {
+      console.log(items[i]);
       fragment.appendChild(getMapPin(items[i]));
     }
     pinsMap.appendChild(fragment);
   };
 
-  pinsData = window.data.getItemsList(8);
+  var onError = function (message) {
+    console.error(message);
+  };
 
+  var onLoad = function (data) {
+    console.log(data);
+    pinsData = data;
+    console.log(pinsData);
+  };
+
+  window.backend.load(onLoad, onError);
+
+  console.log(pinsData);
   var show = function () {
     appendPins(pinsData);
   };
