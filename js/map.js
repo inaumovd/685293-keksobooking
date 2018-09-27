@@ -72,7 +72,7 @@
       upEvt.preventDefault();
 
       if (isPageNotActive()) {
-        window.pin.show(window.pin.pins);
+        window.pin.show();
         activatePage();
       }
 

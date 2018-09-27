@@ -4,7 +4,7 @@
 
   var PIN_WIDTH = 50;
   var PIN_HEIGHT = 70;
-  var pins = [];
+  var pinsData = [];
 
   var mapPinTemplate = document.querySelector('#pin')
     .content
@@ -32,15 +32,14 @@
     pinsMap.appendChild(fragment);
   };
 
-  pins = window.data.getItemsList(8);
+  pinsData = window.data.getItemsList(8);
 
-  var show = function (data) {
-    appendPins(data);
+  var show = function () {
+    appendPins(pinsData);
   };
 
   window.pin = {
     show: show,
-    pins: pins
   };
 
 })();
