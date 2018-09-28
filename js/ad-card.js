@@ -55,7 +55,7 @@
     adItem.querySelector('.popup__text--capacity').textContent = item.offer.rooms + ' комнаты для ' + item.offer.guests + ' гостей';
     adItem.querySelector('.popup__text--time').textContent = 'Заезд после ' + item.offer.checkin + ', ' + 'выезд до ' + item.offer.checkout;
     adItem.querySelector('.popup__description').textContent = item.offer.description;
-    adItem.querySelector('.popup__avatar').src = item.autor.avatar;
+    adItem.querySelector('.popup__avatar').src = item.author.avatar;
 
     var pictures = adItem.querySelector('.popup__photos');
     var newPictures = pictures.cloneNode();

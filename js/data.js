@@ -44,7 +44,7 @@
     var x = window.utils.getRandomInt(0, window.map.pinsMap.offsetWidth);
     var y = window.utils.getRandomInt(window.map.MIN_Y_COORD, window.map.MAX_Y_COORD);
     var item = {
-      autor: {
+      author: {
         avatar: 'img/avatars/user0' + (number + 1) + '.png'
       },
       offer: {

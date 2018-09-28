@@ -11,6 +11,7 @@
   var timeOut = document.querySelector('#timeout');
   var addressInput = document.querySelector('#address');
   var adForm = document.querySelector('.ad-form');
+  var submitButton = adForm.querySelector('.ad-form__submit');
 
   var setAddress = function (data) {
     addressInput.value = data;
@@ -73,6 +74,19 @@
     timeIn.value = timeOut.value;
   };
 
+  var onError = function (message) {
+    window.error.show(message);
+  };
+
+  var closeSuccessMessage = function () {
+
+  };
+
+  var onLoad = function (message) {
+    window.success.show()
+    document.addEventListener('keydown', window.success.escPress);
+  };
+
   roomNumberSelect.addEventListener('focus', function () {
     setDisabledOptions(capacitySelect.querySelectorAll('option'));
   });
@@ -84,6 +98,11 @@
   timeIn.addEventListener('change', timeInChangeHandler);
 
   timeOut.addEventListener('change', timeOutChangeHandler);
+
+  submitButton.addEventListener('click', function (evt) {
+    evt.preventDefault();
+    window.backend.send(new FormData(adForm), onLoad, onError);
+  });
 
   window.form = {
     activate: activate,
