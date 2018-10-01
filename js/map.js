@@ -19,6 +19,9 @@
   var deactivatePage = function () {
     window.form.deactivate();
     window.form.setAddress(getMainPinCoordinate());
+    mainPin.style.left = '570px';
+    mainPin.style.top = '375px';
+    console.log('111');
   };
 
   var getMainPinCoordinate = function () {
@@ -90,7 +93,8 @@
   window.map = {
     MAX_Y_COORD: MAX_Y_COORD,
     MIN_Y_COORD: MIN_Y_COORD,
-    pinsMap: pinsMap
+    pinsMap: pinsMap,
+    deactivatePage: deactivatePage
   };
 
 })();

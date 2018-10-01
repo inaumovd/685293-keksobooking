@@ -40,7 +40,6 @@
 
   var onLoad = function (data) {
     pinsData = data;
-    console.log('1');
   };
 
   window.backend.load(onLoad, onError);

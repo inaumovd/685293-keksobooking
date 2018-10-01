@@ -83,7 +83,7 @@
   };
 
   var onLoad = function (message) {
-    window.success.show()
+    window.success.show();
     document.addEventListener('keydown', window.success.escPress);
   };
 
