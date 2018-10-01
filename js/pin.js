@@ -32,8 +32,6 @@
     pinsMap.appendChild(fragment);
   };
 
-  var errorMessage;
-
   var onError = function (message) {
     window.error.show(message);
   };
@@ -48,8 +46,16 @@
     appendPins(pinsData);
   };
 
+  var deletePins = function () {
+    var pins = document.querySelectorAll('.map__pin:not(.map__pin--main)');
+    for (var i = 0; i < pins.length; i++) {
+      pinsMap.removeChild(pins[i]);
+    }
+  };
+
   window.pin = {
     show: show,
+    deletePins: deletePins
   };
 
 })();

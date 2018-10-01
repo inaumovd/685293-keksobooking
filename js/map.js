@@ -21,7 +21,7 @@
     window.form.setAddress(getMainPinCoordinate());
     mainPin.style.left = '570px';
     mainPin.style.top = '375px';
-    console.log('111');
+    map.classList.add('map--faded');
   };
 
   var getMainPinCoordinate = function () {
