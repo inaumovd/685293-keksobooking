@@ -11,9 +11,6 @@
   var timeOut = document.querySelector('#timeout');
   var addressInput = document.querySelector('#address');
   var adForm = document.querySelector('.ad-form');
-  var titleInput = adForm.querySelector('#title');
-  var descriptionInput = adForm.querySelector('#description');
-  var featuresCheckboxes = adForm.querySelectorAll('.feature__checkbox');
   var resetFormButton = adForm.querySelector('.ad-form__reset');
 
   var setAddress = function (data) {
@@ -31,22 +28,7 @@
     setDisabledFieldsets(fieldsets, true);
     adForm.classList.add('ad-form--disabled');
     updateCapacity();
-    clearForm();
-  };
-
-  var clearForm = function () {
-    titleInput.value = null;
-    descriptionInput.value = null;
-    priceInput.value = null;
-    capacitySelect.value = '1';
-    typeSelect.value = 'flat';
-    timeIn.value = '12:00';
-    timeOut.value = '12:00';
-    roomNumberSelect.value = '1';
-    capacitySelect.value = '1';
-    for (var i = 0; i < featuresCheckboxes.length; i++) {
-      featuresCheckboxes[i].removeAttribute('checked');
-    }
+    adForm.reset();
   };
 
   var setDisabledFieldsets = function (data, bool) {
@@ -97,16 +79,11 @@
 
   var onError = function (message) {
     window.error.show(message);
-    document.addEventListener('keydown', window.error.escPress);
-    document.addEventListener('click', window.error.onPageClickPress);
   };
 
   var onLoad = function () {
     window.success.show();
-    document.addEventListener('keydown', window.success.escPress);
-    document.addEventListener('click', window.success.onPageClickPress);
     window.map.deactivatePage();
-    window.pin.deletePins();
   };
 
   roomNumberSelect.addEventListener('focus', function () {
@@ -126,7 +103,9 @@
     evt.preventDefault();
   });
 
-  resetFormButton.addEventListener('click', clearForm());
+  resetFormButton.addEventListener('click', function () {
+    adForm.reset();
+  });
 
   window.form = {
     activate: activate,

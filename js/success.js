@@ -10,6 +10,8 @@
   var show = function () {
     var successMessage = successTemplate.cloneNode(true);
     main.appendChild(successMessage);
+    document.addEventListener('keydown', window.success.escPress);
+    document.addEventListener('click', window.success.onPageClickPress);
   };
 
   var escPress = function (evt) {

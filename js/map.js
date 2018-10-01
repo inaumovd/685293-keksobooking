@@ -6,6 +6,8 @@
   var MIN_Y_COORD = 130;
   var MAIN_PIN_WIDTH = 65;
   var MAIN_PIN_HEIGHT = 87;
+  var MAIN_PIN_LEFT_COORD = '570px';
+  var MAIN_PIN_TOP_COORD = '375px';
 
   var map = document.querySelector('.map');
   var pinsMap = document.querySelector('.map__pins');
@@ -14,13 +16,19 @@
   var activatePage = function () {
     map.classList.remove('map--faded');
     window.form.activate();
+    window.pin.show();
+  };
+
+  var resetMainPin = function () {
+    mainPin.style.left = MAIN_PIN_LEFT_COORD;
+    mainPin.style.top = MAIN_PIN_TOP_COORD;
   };
 
   var deactivatePage = function () {
+    window.pin.deletePins();
     window.form.deactivate();
     window.form.setAddress(getMainPinCoordinate());
-    mainPin.style.left = '570px';
-    mainPin.style.top = '375px';
+    resetMainPin();
     map.classList.add('map--faded');
   };
 
@@ -75,7 +83,6 @@
       upEvt.preventDefault();
 
       if (isPageNotActive()) {
-        window.pin.show();
         activatePage();
       }
 

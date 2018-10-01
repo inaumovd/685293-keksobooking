@@ -12,7 +12,8 @@
     var errorMessage = errorTemplate.cloneNode(true);
     errorMessage.querySelector('.error__message').textContent = message;
     errorButton = errorMessage.querySelector('.error__button');
-
+    document.addEventListener('keydown', window.error.escPress);
+    document.addEventListener('click', window.error.onPageClickPress);
     main.appendChild(errorMessage);
   };
 
