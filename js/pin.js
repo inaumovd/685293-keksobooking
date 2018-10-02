@@ -39,9 +39,6 @@
 
   var onLoad = function (data) {
     pinsData = data;
-    housingTypeSelect.addEventListener('change', function () {
-      console.log(pinsData);
-    });
   };
 
   window.backend.load(onLoad, onError);
