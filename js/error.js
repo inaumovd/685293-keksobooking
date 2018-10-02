@@ -12,28 +12,25 @@
     var errorMessage = errorTemplate.cloneNode(true);
     errorMessage.querySelector('.error__message').textContent = message;
     errorButton = errorMessage.querySelector('.error__button');
-    document.addEventListener('keydown', window.error.escPress);
-    document.addEventListener('click', window.error.onPageClickPress);
+    document.addEventListener('keydown', onEscPress);
+    document.addEventListener('click', onPageClick);
     main.appendChild(errorMessage);
   };
 
-  var escPress = function (evt) {
+  var onEscPress = function (evt) {
     if (evt.keyCode === window.utils.ESC_KEYCODE) {
       document.querySelector('main').removeChild(document.querySelector('.error'));
-      document.removeEventListener('keydown', escPress);
+      document.removeEventListener('keydown', onEscPress);
     }
   };
 
-  var onPageClickPress = function () {
+  var onPageClick = function () {
     document.querySelector('main').removeChild(document.querySelector('.error'));
-    document.removeEventListener('click', onPageClickPress);
+    document.removeEventListener('click', onPageClick);
   };
 
   window.error = {
     show: show,
-    escPress: escPress,
-    onPageClickPress: onPageClickPress,
-    errorButton: errorButton
   };
 
 })();

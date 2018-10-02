@@ -12,6 +12,8 @@
   var map = document.querySelector('.map');
   var pinsMap = document.querySelector('.map__pins');
   var mainPin = document.querySelector('.map__pin--main');
+  var initMainPinLeft = mainPin.offsetLeft;
+  var initMainPinTop = mainPin.offsetTop;
 
   var activatePage = function () {
     map.classList.remove('map--faded');
@@ -20,8 +22,8 @@
   };
 
   var resetMainPin = function () {
-    mainPin.style.left = MAIN_PIN_LEFT_COORD;
-    mainPin.style.top = MAIN_PIN_TOP_COORD;
+    mainPin.style.left = initMainPinLeft + 'px';
+    mainPin.style.top = initMainPinTop + 'px';
   };
 
   var deactivatePage = function () {

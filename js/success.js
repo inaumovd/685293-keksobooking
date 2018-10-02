@@ -10,28 +10,26 @@
   var show = function () {
     var successMessage = successTemplate.cloneNode(true);
     main.appendChild(successMessage);
-    document.addEventListener('keydown', window.success.escPress);
-    document.addEventListener('click', window.success.onPageClickPress);
+    document.addEventListener('keydown', onEscPress);
+    document.addEventListener('click', onPageClick);
   };
 
-  var escPress = function (evt) {
+  var onEscPress = function (evt) {
     if (evt.keyCode === window.utils.ESC_KEYCODE) {
       document.querySelector('main').removeChild(document.querySelector('.success'));
-      document.removeEventListener('keydown', escPress);
-      document.removeEventListener('click', onPageClickPress);
+      document.removeEventListener('keydown', onEscPress);
+      document.removeEventListener('click', onPageClick);
     }
   };
 
-  var onPageClickPress = function () {
+  var onPageClick = function () {
     document.querySelector('main').removeChild(document.querySelector('.success'));
-    document.removeEventListener('click', onPageClickPress);
-    document.removeEventListener('keydown', escPress);
+    document.removeEventListener('click', onPageClick);
+    document.removeEventListener('keydown', onEscPress);
   };
 
   window.success = {
     show: show,
-    escPress: escPress,
-    onPageClickPress: onPageClickPress
   };
 
 })();

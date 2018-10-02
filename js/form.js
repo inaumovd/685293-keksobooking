@@ -60,7 +60,7 @@
     capacitySelect.setCustomValidity(errorMessage);
   };
 
-  var typeSelectHandler = function () {
+  var onTypeSelectChange = function () {
     switch (typeSelect.value) {
       case 'bungalo': priceInput.setAttribute('min', '0'); break;
       case 'flat': priceInput.setAttribute('min', '1000'); break;
@@ -69,11 +69,11 @@
     }
   };
 
-  var timeInChangeHandler = function () {
+  var onTimeInChange = function () {
     timeOut.value = timeIn.value;
   };
 
-  var timeOutChangeHandler = function () {
+  var onTimeOutChange = function () {
     timeIn.value = timeOut.value;
   };
 
@@ -90,13 +90,15 @@
     setDisabledOptions(capacitySelect.querySelectorAll('option'));
   });
 
-  roomNumberSelect.addEventListener('change', updateCapacity);
+  roomNumberSelect.addEventListener('change', function ()  {
+    updateCapacity();
+  });
 
-  typeSelect.addEventListener('change', typeSelectHandler);
+  typeSelect.addEventListener('change', onTypeSelectChange);
 
-  timeIn.addEventListener('change', timeInChangeHandler);
+  timeIn.addEventListener('change', onTimeInChange);
 
-  timeOut.addEventListener('change', timeOutChangeHandler);
+  timeOut.addEventListener('change', onTimeOutChange);
 
   adForm.addEventListener('submit', function (evt) {
     window.backend.send(new FormData(adForm), onLoad, onError);

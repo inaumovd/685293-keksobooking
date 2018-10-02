@@ -37,7 +37,9 @@
     var adItem = mapAdTemplate.cloneNode(true);
     var closeBtn = adItem.querySelector('.popup__close');
 
-    closeBtn.addEventListener('click', closeAd);
+    closeBtn.addEventListener('click', function () {
+      closeAd();
+    });
     document.addEventListener('keydown', onPopupEscPress);
 
     adItem.querySelector('.popup__title').textContent = item.offer.title;
