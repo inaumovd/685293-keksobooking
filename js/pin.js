@@ -10,6 +10,7 @@
     .content
     .querySelector('.map__pin');
   var pinsMap = document.querySelector('.map__pins');
+  var housingTypeSelect = document.querySelector('#housing-type');
 
   var getMapPin = function (item) {
     var mapPin = mapPinTemplate.cloneNode(true);
@@ -38,6 +39,9 @@
 
   var onLoad = function (data) {
     pinsData = data;
+    housingTypeSelect.addEventListener('change', function () {
+      console.log(pinsData);
+    });
   };
 
   window.backend.load(onLoad, onError);
@@ -55,7 +59,8 @@
 
   window.pin = {
     show: show,
-    deletePins: deletePins
+    deletePins: deletePins,
+    pinsData: pinsData
   };
 
 })();
