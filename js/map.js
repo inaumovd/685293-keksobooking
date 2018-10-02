@@ -10,15 +10,26 @@
   var map = document.querySelector('.map');
   var pinsMap = document.querySelector('.map__pins');
   var mainPin = document.querySelector('.map__pin--main');
+  var initMainPinLeft = mainPin.offsetLeft;
+  var initMainPinTop = mainPin.offsetTop;
 
   var activatePage = function () {
     map.classList.remove('map--faded');
     window.form.activate();
+    window.pin.show();
+  };
+
+  var resetMainPin = function () {
+    mainPin.style.left = initMainPinLeft + 'px';
+    mainPin.style.top = initMainPinTop + 'px';
   };
 
   var deactivatePage = function () {
+    window.pin.deletePins();
     window.form.deactivate();
     window.form.setAddress(getMainPinCoordinate());
+    resetMainPin();
+    map.classList.add('map--faded');
   };
 
   var getMainPinCoordinate = function () {
@@ -72,7 +83,6 @@
       upEvt.preventDefault();
 
       if (isPageNotActive()) {
-        window.pin.show();
         activatePage();
       }
 
@@ -90,7 +100,8 @@
   window.map = {
     MAX_Y_COORD: MAX_Y_COORD,
     MIN_Y_COORD: MIN_Y_COORD,
-    pinsMap: pinsMap
+    pinsMap: pinsMap,
+    deactivatePage: deactivatePage
   };
 
 })();

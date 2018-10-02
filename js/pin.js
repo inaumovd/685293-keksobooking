@@ -18,7 +18,7 @@
       window.adCard.appendAdCard(item);
     });
     mapPin.style = 'left: ' + (item.location.x - PIN_WIDTH / 2) + 'px; top: ' + (item.location.y - PIN_HEIGHT) + 'px;';
-    mapPin.querySelector('img').src = item.autor.avatar;
+    mapPin.querySelector('img').src = item.author.avatar;
     mapPin.querySelector('img').alt = item.offer.title;
 
     return mapPin;
@@ -32,14 +32,30 @@
     pinsMap.appendChild(fragment);
   };
 
-  pinsData = window.data.getItemsList(8);
+  var onError = function (message) {
+    window.error.show(message);
+  };
+
+  var onLoad = function (data) {
+    pinsData = data;
+  };
+
+  window.backend.load(onLoad, onError);
 
   var show = function () {
     appendPins(pinsData);
   };
 
+  var deletePins = function () {
+    var pins = document.querySelectorAll('.map__pin:not(.map__pin--main)');
+    for (var i = 0; i < pins.length; i++) {
+      pinsMap.removeChild(pins[i]);
+    }
+  };
+
   window.pin = {
     show: show,
+    deletePins: deletePins
   };
 
 })();

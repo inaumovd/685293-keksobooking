@@ -11,6 +11,7 @@
   var timeOut = document.querySelector('#timeout');
   var addressInput = document.querySelector('#address');
   var adForm = document.querySelector('.ad-form');
+  var resetFormButton = adForm.querySelector('.ad-form__reset');
 
   var setAddress = function (data) {
     addressInput.value = data;
@@ -25,6 +26,9 @@
 
   var deactivate = function () {
     setDisabledFieldsets(fieldsets, true);
+    adForm.classList.add('ad-form--disabled');
+    updateCapacity();
+    adForm.reset();
   };
 
   var setDisabledFieldsets = function (data, bool) {
@@ -56,7 +60,7 @@
     capacitySelect.setCustomValidity(errorMessage);
   };
 
-  var typeSelectHandler = function () {
+  var onTypeSelectChange = function () {
     switch (typeSelect.value) {
       case 'bungalo': priceInput.setAttribute('min', '0'); break;
       case 'flat': priceInput.setAttribute('min', '1000'); break;
@@ -65,25 +69,45 @@
     }
   };
 
-  var timeInChangeHandler = function () {
+  var onTimeInChange = function () {
     timeOut.value = timeIn.value;
   };
 
-  var timeOutChangeHandler = function () {
+  var onTimeOutChange = function () {
     timeIn.value = timeOut.value;
+  };
+
+  var onError = function (message) {
+    window.error.show(message);
+  };
+
+  var onLoad = function () {
+    window.success.show();
+    window.map.deactivatePage();
   };
 
   roomNumberSelect.addEventListener('focus', function () {
     setDisabledOptions(capacitySelect.querySelectorAll('option'));
   });
 
-  roomNumberSelect.addEventListener('change', updateCapacity);
+  roomNumberSelect.addEventListener('change', function () {
+    updateCapacity();
+  });
 
-  typeSelect.addEventListener('change', typeSelectHandler);
+  typeSelect.addEventListener('change', onTypeSelectChange);
 
-  timeIn.addEventListener('change', timeInChangeHandler);
+  timeIn.addEventListener('change', onTimeInChange);
 
-  timeOut.addEventListener('change', timeOutChangeHandler);
+  timeOut.addEventListener('change', onTimeOutChange);
+
+  adForm.addEventListener('submit', function (evt) {
+    window.backend.send(new FormData(adForm), onLoad, onError);
+    evt.preventDefault();
+  });
+
+  resetFormButton.addEventListener('click', function () {
+    adForm.reset();
+  });
 
   window.form = {
     activate: activate,
