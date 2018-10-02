@@ -6,8 +6,6 @@
   var MIN_Y_COORD = 130;
   var MAIN_PIN_WIDTH = 65;
   var MAIN_PIN_HEIGHT = 87;
-  var MAIN_PIN_LEFT_COORD = '570px';
-  var MAIN_PIN_TOP_COORD = '375px';
 
   var map = document.querySelector('.map');
   var pinsMap = document.querySelector('.map__pins');

@@ -90,7 +90,7 @@
     setDisabledOptions(capacitySelect.querySelectorAll('option'));
   });
 
-  roomNumberSelect.addEventListener('change', function ()  {
+  roomNumberSelect.addEventListener('change', function () {
     updateCapacity();
   });
 
