@@ -10,7 +10,6 @@
     .content
     .querySelector('.map__pin');
   var pinsMap = document.querySelector('.map__pins');
-  var housingTypeSelect = document.querySelector('#housing-type');
 
   var getMapPin = function (item) {
     var mapPin = mapPinTemplate.cloneNode(true);

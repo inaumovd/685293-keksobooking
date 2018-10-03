@@ -9,7 +9,6 @@
   var housingPriceSelect = document.querySelector('#housing-price');
   var housingRoomsSelect = document.querySelector('#housing-rooms');
   var housingGuestsSelect = document.querySelector('#housing-guests');
-  var housingGuestsSelect = document.querySelector('#housing-guests');
   var featureWiFi = document.querySelector('#filter-wifi');
   var featureDishwasher = document.querySelector('#filter-dishwasher');
   var featureParking = document.querySelector('#filter-parking');
@@ -49,7 +48,7 @@
       case 'middle': match = price >= 10000 && price < 50000; break;
       case 'high': match = price >= 50000; break;
     }
-     return match;
+    return match;
   };
 
   var isMatchFeatures = function (formValue, features) {
@@ -100,4 +99,6 @@
   featureElevator.addEventListener('change', onFilterItemChange);
   featureConditioner.addEventListener('change', onFilterItemChange);
 
+
 })();
+
