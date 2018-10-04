@@ -2,7 +2,6 @@
 
 (function () {
 
-  // var ENTER_KEYCODE = 13;
   var ESC_KEYCODE = 27;
 
   var getRandomInt = function (min, max) {
@@ -37,7 +36,6 @@
   }
 
   window.utils = {
-    // ENTER_KEYCODE: ENTER_KEYCODE,
     ESC_KEYCODE: ESC_KEYCODE,
 
     getRandomInt: getRandomInt,

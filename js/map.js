@@ -27,8 +27,8 @@
   var deactivatePage = function () {
     window.pin.deletePins();
     window.form.deactivate();
-    window.form.setAddress(getMainPinCoordinate());
     resetMainPin();
+    window.form.setAddress(getMainPinCoordinate());
     map.classList.add('map--faded');
   };
 

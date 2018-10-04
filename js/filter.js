@@ -70,6 +70,7 @@
   };
 
   var getFiltratedPins = function () {
+    window.adCard.closeAd();
     getMapFilterData();
     getFilteredAds();
     window.pin.deletePins();

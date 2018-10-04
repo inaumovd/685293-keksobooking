@@ -80,9 +80,11 @@
   };
 
   var closeAd = function () {
-    map.removeChild(document.querySelector('article.map__card'));
-    document.removeEventListener('keydown', onPopupEscPress);
-    currentAd = null;
+    if (currentAd) {
+      map.removeChild(document.querySelector('article.map__card'));
+      document.removeEventListener('keydown', onPopupEscPress);
+      currentAd = null;
+    }
   };
 
   var onPopupEscPress = function (evt) {
@@ -93,7 +95,8 @@
 
   window.adCard = {
     appendAdCard: appendAdCard,
-    closeAd: closeAd
+    closeAd: closeAd,
+    currentAd: currentAd
   };
 
 })();
