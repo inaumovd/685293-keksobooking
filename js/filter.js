@@ -79,5 +79,5 @@
   var onFilterItemChange = window.utils.debounce(getFiltratedPins, 250);
 
   filtersForm.addEventListener('change', onFilterItemChange);
-})();
 
+})();

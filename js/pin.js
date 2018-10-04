@@ -4,6 +4,7 @@
 
   var PIN_WIDTH = 50;
   var PIN_HEIGHT = 70;
+  // var MAX_VISIBLE_PINS = 5;
   var pinsData = [];
 
   var mapPinTemplate = document.querySelector('#pin')
@@ -14,9 +15,15 @@
   var getMapPin = function (item) {
     var mapPin = mapPinTemplate.cloneNode(true);
 
-    mapPin.addEventListener('click', function () {
+    mapPin.addEventListener('click', function (evt) {
       window.adCard.appendAdCard(item);
+      var selected = document.querySelector('.map__pin--active');
+      if (selected) {
+        selected.classList.remove('map__pin--active');
+      }
+      evt.currentTarget.classList.add('map__pin--active');
     });
+
     mapPin.style = 'left: ' + (item.location.x - PIN_WIDTH / 2) + 'px; top: ' + (item.location.y - PIN_HEIGHT) + 'px;';
     mapPin.querySelector('img').src = item.author.avatar;
     mapPin.querySelector('img').alt = item.offer.title;
