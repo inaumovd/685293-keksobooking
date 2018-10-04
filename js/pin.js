@@ -4,7 +4,7 @@
 
   var PIN_WIDTH = 50;
   var PIN_HEIGHT = 70;
-  // var MAX_VISIBLE_PINS = 5;
+  var MAX_PINS = 5;
   var pinsData = [];
 
   var mapPinTemplate = document.querySelector('#pin')
@@ -32,9 +32,10 @@
   };
 
   var appendPins = function (items) {
+    var arr = items.slice(0, MAX_PINS);
     var fragment = document.createDocumentFragment();
-    for (var i = 0; i < items.length; i++) {
-      fragment.appendChild(getMapPin(items[i]));
+    for (var i = 0; i < arr.length; i++) {
+      fragment.appendChild(getMapPin(arr[i]));
     }
     pinsMap.appendChild(fragment);
   };

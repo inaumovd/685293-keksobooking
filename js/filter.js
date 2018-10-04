@@ -76,7 +76,7 @@
     window.pin.appendPins(filteredAds);
   };
 
-  var onFilterItemChange = window.utils.debounce(getFiltratedPins, 250);
+  var onFilterItemChange = window.utils.debounce(getFiltratedPins, 500);
 
   filtersForm.addEventListener('change', onFilterItemChange);
 
