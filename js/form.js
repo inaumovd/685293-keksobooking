@@ -106,7 +106,7 @@
   });
 
   resetFormButton.addEventListener('click', function () {
-    adForm.reset();
+    window.map.deactivatePage();
   });
 
   window.form = {
