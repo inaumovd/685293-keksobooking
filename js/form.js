@@ -106,6 +106,7 @@
   });
 
   resetFormButton.addEventListener('click', function () {
+    window.adCard.closeAd();
     window.map.deactivatePage();
   });
 
