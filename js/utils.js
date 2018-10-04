@@ -17,6 +17,25 @@
     return Math.random() - 0.5;
   };
 
+  function debounce(func, wait, immediate) {
+    var timeout;
+    return function () {
+      var args = arguments;
+      var later = function () {
+        timeout = null;
+        if (!immediate) {
+          func.apply(debounce(), args);
+        }
+      };
+      var callNow = immediate && !timeout;
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+      if (callNow) {
+        func.apply(debounce(), args);
+      }
+    };
+  }
+
   window.utils = {
     // ENTER_KEYCODE: ENTER_KEYCODE,
     ESC_KEYCODE: ESC_KEYCODE,
@@ -24,6 +43,7 @@
     getRandomInt: getRandomInt,
     getRandomItem: getRandomItem,
     randomCompare: randomCompare,
+    debounce: debounce
   };
 
 })();

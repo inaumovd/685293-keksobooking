@@ -5,16 +5,6 @@
   var ANY = 'any';
 
   var filtersForm = document.querySelector('.map__filters');
-  var housingTypeSelect = document.querySelector('#housing-type');
-  var housingPriceSelect = document.querySelector('#housing-price');
-  var housingRoomsSelect = document.querySelector('#housing-rooms');
-  var housingGuestsSelect = document.querySelector('#housing-guests');
-  var featureWiFi = document.querySelector('#filter-wifi');
-  var featureDishwasher = document.querySelector('#filter-dishwasher');
-  var featureParking = document.querySelector('#filter-parking');
-  var featureWasher = document.querySelector('#filter-washer');
-  var featureElevator = document.querySelector('#filter-elevator');
-  var featureConditioner = document.querySelector('#filter-conditioner');
   var formData = {features: []};
   var filteredAds;
 
@@ -38,7 +28,7 @@
   };
 
   var isMatchHousingGuests = function (formValue, guests) {
-    return formValue === ANY || formValue === String(guests);
+    return formValue === ANY || formValue >= String(guests);
   };
 
   var isMatchHoustingPrice = function (formValue, price) {
@@ -86,19 +76,8 @@
     window.pin.appendPins(filteredAds);
   };
 
-  var onFilterItemChange = window.debounce.use(getFiltratedPins, 250);
+  var onFilterItemChange = window.utils.debounce(getFiltratedPins, 250);
 
-  housingTypeSelect.addEventListener('change', onFilterItemChange);
-  housingPriceSelect.addEventListener('change', onFilterItemChange);
-  housingRoomsSelect.addEventListener('change', onFilterItemChange);
-  housingGuestsSelect.addEventListener('change', onFilterItemChange);
-  featureWiFi.addEventListener('change', onFilterItemChange);
-  featureDishwasher.addEventListener('change', onFilterItemChange);
-  featureParking.addEventListener('change', onFilterItemChange);
-  featureWasher.addEventListener('change', onFilterItemChange);
-  featureElevator.addEventListener('change', onFilterItemChange);
-  featureConditioner.addEventListener('change', onFilterItemChange);
-
-
+  filtersForm.addEventListener('change', onFilterItemChange);
 })();
 
