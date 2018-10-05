@@ -42,9 +42,23 @@
     });
     document.addEventListener('keydown', onPopupEscPress);
 
-    adItem.querySelector('.popup__title').textContent = item.offer.title;
-    adItem.querySelector('.popup__text--address').textContent = item.offer.address;
-    adItem.querySelector('.popup__text--price').innerHTML = item.offer.price + '&#x20bd;<span>/ночь</span></p>';
+    if (item.offer.title) {
+      adItem.querySelector('.popup__title').textContent = item.offer.title;
+    } else {
+      adItem.querySelector('.popup__title').setAttribute('hidden', 'hidden');
+    }
+
+    if (item.offer.address) {
+      adItem.querySelector('.popup__text--address').textContent = item.offer.address;
+    } else {
+      adItem.querySelector('.popup__text--address').setAttribute('hidden', 'hidden');
+    }
+
+    if (item.offer.price) {
+      adItem.querySelector('.popup__text--price').innerHTML = item.offer.price + '&#x20bd;<span>/ночь</span></p>';
+    } else {
+      adItem.querySelector('.popup__text--price').setAttribute('hidden', 'hidden');
+    }
 
     var offerType;
     switch (item.offer.type) {
@@ -53,21 +67,54 @@
       case 'house': offerType = 'Дом'; break;
       case 'palace': offerType = 'Дворец'; break;
     }
-    adItem.querySelector('.popup__type').textContent = offerType;
-    adItem.querySelector('.popup__text--capacity').textContent = item.offer.rooms + ' комнаты для ' + item.offer.guests + ' гостей';
-    adItem.querySelector('.popup__text--time').textContent = 'Заезд после ' + item.offer.checkin + ', ' + 'выезд до ' + item.offer.checkout;
-    adItem.querySelector('.popup__description').textContent = item.offer.description;
-    adItem.querySelector('.popup__avatar').src = item.author.avatar;
 
-    var pictures = adItem.querySelector('.popup__photos');
-    var newPictures = pictures.cloneNode();
-    newPictures.appendChild(getPictures(item.offer.photos));
-    adItem.replaceChild(newPictures, pictures);
+    if (offerType) {
+      adItem.querySelector('.popup__type').textContent = offerType;
+    } else {
+      adItem.querySelector('.popup__type').setAttribute('hidden', 'hidden');
+    }
 
-    var features = adItem.querySelector('.popup__features');
-    var newFeatures = features.cloneNode();
-    newFeatures.appendChild(getFeatures(item.offer.features));
-    adItem.replaceChild(newFeatures, features);
+    if (item.offer.rooms) {
+      adItem.querySelector('.popup__text--capacity').textContent = item.offer.rooms + ' комнаты для ' + item.offer.guests + ' гостей';
+    } else {
+      adItem.querySelector('.popup__text--capacity').setAttribute('hidden', 'hidden');
+    }
+
+    if (item.offer.checkin && item.offer.checkout) {
+      adItem.querySelector('.popup__text--time').textContent = 'Заезд после ' + item.offer.checkin + ', ' + 'выезд до ' + item.offer.checkout;
+    } else {
+      adItem.querySelector('.popup__text--capacity').setAttribute('hidden', 'hidden');
+    }
+
+    if (item.offer.description) {
+      adItem.querySelector('.popup__description').textContent = item.offer.description;
+    } else {
+      adItem.querySelector('.popup__description').setAttribute('hidden', 'hidden');
+    }
+
+    if (item.offer.description) {
+      adItem.querySelector('.popup__avatar').src = item.author.avatar;
+    } else {
+      adItem.querySelector('.popup__avatar').setAttribute('hidden', 'hidden');
+    }
+
+    if (item.offer.photos) {
+      var pictures = adItem.querySelector('.popup__photos');
+      var newPictures = pictures.cloneNode();
+      newPictures.appendChild(getPictures(item.offer.photos));
+      adItem.replaceChild(newPictures, pictures);
+    } else {
+      adItem.querySelector('.popup__photos').setAttribute('hidden', 'hidden');
+    }
+
+    if (item.offer.features) {
+      var features = adItem.querySelector('.popup__features');
+      var newFeatures = features.cloneNode();
+      newFeatures.appendChild(getFeatures(item.offer.features));
+      adItem.replaceChild(newFeatures, features);
+    } else {
+      adItem.querySelector('.popup__features').setAttribute('hidden', 'hidden');
+    }
 
     return adItem;
   };
@@ -95,8 +142,7 @@
 
   window.adCard = {
     appendAdCard: appendAdCard,
-    closeAd: closeAd,
-    currentAd: currentAd
+    closeAd: closeAd
   };
 
 })();

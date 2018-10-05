@@ -5,8 +5,20 @@
   var ANY = 'any';
 
   var filtersForm = document.querySelector('.map__filters');
+  var filtersFormFieldsets = filtersForm.querySelectorAll('fieldset');
+  var filtersFormSelects = filtersForm.querySelectorAll('select');
   var formData = {features: []};
   var filteredAds;
+
+  var activate = function () {
+    window.utils.setDisabled(filtersFormFieldsets, false);
+    window.utils.setDisabled(filtersFormSelects, false);
+  };
+
+  var deactivate = function () {
+    window.utils.setDisabled(filtersFormFieldsets, true);
+    window.utils.setDisabled(filtersFormSelects, true);
+  };
 
   var getMapFilterData = function () {
     var data = {features: []};
@@ -80,5 +92,10 @@
   var onFilterItemChange = window.utils.debounce(getFiltratedPins, 500);
 
   filtersForm.addEventListener('change', onFilterItemChange);
+
+  window.filter = {
+    activate: activate,
+    deactivate: deactivate
+  };
 
 })();

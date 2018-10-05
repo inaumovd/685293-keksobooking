@@ -16,7 +16,8 @@
   var activatePage = function () {
     map.classList.remove('map--faded');
     window.form.activate();
-    window.pin.show();
+    window.pin.load();
+    window.filter.activate();
   };
 
   var resetMainPin = function () {
@@ -27,6 +28,7 @@
   var deactivatePage = function () {
     window.pin.deletePins();
     window.form.deactivate();
+    window.filter.deactivate();
     resetMainPin();
     window.form.setAddress(getMainPinCoordinate());
     map.classList.add('map--faded');
@@ -98,9 +100,6 @@
   deactivatePage();
 
   window.map = {
-    MAX_Y_COORD: MAX_Y_COORD,
-    MIN_Y_COORD: MIN_Y_COORD,
-    pinsMap: pinsMap,
     deactivatePage: deactivatePage
   };
 
