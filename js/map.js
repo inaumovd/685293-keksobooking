@@ -2,8 +2,6 @@
 
 (function () {
 
-  var MAX_Y_COORD = 630;
-  var MIN_Y_COORD = 130;
   var MAIN_PIN_WIDTH = 65;
   var MAIN_PIN_HEIGHT = 87;
 

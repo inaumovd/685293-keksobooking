@@ -95,8 +95,7 @@
 
   window.adCard = {
     appendAdCard: appendAdCard,
-    closeAd: closeAd,
-    currentAd: currentAd
+    closeAd: closeAd
   };
 
 })();
