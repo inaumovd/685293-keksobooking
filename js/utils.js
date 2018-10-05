@@ -35,7 +35,7 @@
     };
   }
 
-  var setDisabledInputs = function (data, bool) {
+  var setDisabled = function (data, bool) {
     for (var i = 0; i < data.length; i++) {
       data[i].disabled = bool;
     }
@@ -48,7 +48,7 @@
     getRandomItem: getRandomItem,
     randomCompare: randomCompare,
     debounce: debounce,
-    setDisabledInputs: setDisabledInputs
+    setDisabled: setDisabled
   };
 
 })();

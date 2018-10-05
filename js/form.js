@@ -6,11 +6,11 @@
   var capacitySelect = document.querySelector('#capacity');
   var typeSelect = document.querySelector('#type');
   var priceInput = document.querySelector('#price');
-  var fieldsets = document.querySelectorAll('fieldset');
   var timeIn = document.querySelector('#timein');
   var timeOut = document.querySelector('#timeout');
   var addressInput = document.querySelector('#address');
   var adForm = document.querySelector('.ad-form');
+  var adFormFieldsets = adForm.querySelectorAll('fieldset');
   var resetFormButton = adForm.querySelector('.ad-form__reset');
 
 
@@ -20,13 +20,13 @@
 
   var activate = function () {
     adForm.classList.remove('ad-form--disabled');
-    window.utils.setDisabledInputs(fieldsets, false);
+    window.utils.setDisabled(adFormFieldsets, false);
     capacitySelect.value = '1';
     updateCapacity();
   };
 
   var deactivate = function () {
-    window.utils.setDisabledInputs(fieldsets, true);
+    window.utils.setDisabled(adFormFieldsets, true);
     adForm.classList.add('ad-form--disabled');
     updateCapacity();
     adForm.reset();

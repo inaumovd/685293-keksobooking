@@ -12,13 +12,12 @@
   var mainPin = document.querySelector('.map__pin--main');
   var initMainPinLeft = mainPin.offsetLeft;
   var initMainPinTop = mainPin.offsetTop;
-  var filtersSelects = document.querySelectorAll('select');
 
   var activatePage = function () {
     map.classList.remove('map--faded');
     window.form.activate();
     window.pin.load();
-    window.utils.setDisabledInputs(filtersSelects, false);
+    window.filter.activate();
   };
 
   var resetMainPin = function () {
@@ -29,10 +28,10 @@
   var deactivatePage = function () {
     window.pin.deletePins();
     window.form.deactivate();
+    window.filter.deactivate();
     resetMainPin();
     window.form.setAddress(getMainPinCoordinate());
     map.classList.add('map--faded');
-    window.utils.setDisabledInputs(filtersSelects, true);
   };
 
   var getMainPinCoordinate = function () {
