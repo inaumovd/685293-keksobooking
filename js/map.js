@@ -12,11 +12,13 @@
   var mainPin = document.querySelector('.map__pin--main');
   var initMainPinLeft = mainPin.offsetLeft;
   var initMainPinTop = mainPin.offsetTop;
+  var filtersSelects = document.querySelectorAll('select');
 
   var activatePage = function () {
     map.classList.remove('map--faded');
     window.form.activate();
     window.pin.show();
+    window.utils.setDisabledInputs(filtersSelects, false);
   };
 
   var resetMainPin = function () {
@@ -30,6 +32,7 @@
     resetMainPin();
     window.form.setAddress(getMainPinCoordinate());
     map.classList.add('map--faded');
+    window.utils.setDisabledInputs(filtersSelects, true);
   };
 
   var getMainPinCoordinate = function () {

@@ -13,29 +13,26 @@
   var adForm = document.querySelector('.ad-form');
   var resetFormButton = adForm.querySelector('.ad-form__reset');
 
+
   var setAddress = function (data) {
     addressInput.value = data;
   };
 
   var activate = function () {
     adForm.classList.remove('ad-form--disabled');
-    setDisabledFieldsets(fieldsets, false);
+    window.utils.setDisabledInputs(fieldsets, false);
     capacitySelect.value = '1';
     updateCapacity();
   };
 
   var deactivate = function () {
-    setDisabledFieldsets(fieldsets, true);
+    window.utils.setDisabledInputs(fieldsets, true);
     adForm.classList.add('ad-form--disabled');
     updateCapacity();
     adForm.reset();
   };
 
-  var setDisabledFieldsets = function (data, bool) {
-    for (var i = 0; i < data.length; i++) {
-      data[i].disabled = bool;
-    }
-  };
+
 
   var setDisabledOptions = function (node) {
     for (var i = 0; i < node.length; i++) {

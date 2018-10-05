@@ -35,13 +35,20 @@
     };
   }
 
+  var setDisabledInputs = function (data, bool) {
+    for (var i = 0; i < data.length; i++) {
+      data[i].disabled = bool;
+    }
+  };
+
   window.utils = {
     ESC_KEYCODE: ESC_KEYCODE,
 
     getRandomInt: getRandomInt,
     getRandomItem: getRandomItem,
     randomCompare: randomCompare,
-    debounce: debounce
+    debounce: debounce,
+    setDisabledInputs: setDisabledInputs
   };
 
 })();
