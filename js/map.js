@@ -2,6 +2,8 @@
 
 (function () {
 
+  var MAX_Y_COORD = 630;
+  var MIN_Y_COORD = 130;
   var MAIN_PIN_WIDTH = 65;
   var MAIN_PIN_HEIGHT = 87;
 
@@ -96,9 +98,6 @@
   deactivatePage();
 
   window.map = {
-    MAX_Y_COORD: MAX_Y_COORD,
-    MIN_Y_COORD: MIN_Y_COORD,
-    pinsMap: pinsMap,
     deactivatePage: deactivatePage
   };
 
