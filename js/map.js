@@ -17,7 +17,7 @@
   var activatePage = function () {
     map.classList.remove('map--faded');
     window.form.activate();
-    window.pin.show();
+    window.pin.load();
     window.utils.setDisabledInputs(filtersSelects, false);
   };
 

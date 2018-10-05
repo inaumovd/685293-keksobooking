@@ -46,12 +46,11 @@
 
   var onLoad = function (data) {
     pinsData = data;
+    appendPins(pinsData);
   };
 
-  window.backend.load(onLoad, onError);
-
-  var show = function () {
-    appendPins(pinsData);
+  var load = function () {
+    window.backend.load(onLoad, onError);
   };
 
   var deletePins = function () {
@@ -66,10 +65,10 @@
   };
 
   window.pin = {
-    show: show,
     deletePins: deletePins,
     getPinsData: getPinsData,
-    appendPins: appendPins
+    appendPins: appendPins,
+    load: load
   };
 
 })();
