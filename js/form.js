@@ -21,7 +21,6 @@
   var activate = function () {
     adForm.classList.remove('ad-form--disabled');
     window.utils.setDisabled(adFormFieldsets, false);
-    capacitySelect.value = '1';
     updateCapacity();
     onTypeSelectChange();
   };
@@ -51,6 +50,9 @@
       } else {
         items[i].disabled = (items[i].value === '0' || items[i].value > roomNumber);
       }
+    }
+    if (capacitySelect.value > roomNumberSelect.value) {
+      capacitySelect.value = roomNumberSelect.value;
     }
     errorMessage = currentCapacityOption.disabled ? 'Некорректный выбор' : '';
     capacitySelect.setCustomValidity(errorMessage);
