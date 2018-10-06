@@ -100,7 +100,7 @@
   deactivatePage();
 
   window.map = {
-    deactivatePage: deactivatePage
+    deactivatePage: deactivatePage,
   };
 
 })();

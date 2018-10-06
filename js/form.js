@@ -103,9 +103,10 @@
     evt.preventDefault();
   });
 
-  resetFormButton.addEventListener('click', function () {
+  resetFormButton.addEventListener('click', function (evt) {
     window.adCard.closeAd();
     window.map.deactivatePage();
+    evt.preventDefault();
   });
 
   window.form = {
