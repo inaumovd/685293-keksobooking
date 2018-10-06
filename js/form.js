@@ -23,6 +23,7 @@
     window.utils.setDisabled(adFormFieldsets, false);
     capacitySelect.value = '1';
     updateCapacity();
+    onTypeSelectChange();
   };
 
   var deactivate = function () {
