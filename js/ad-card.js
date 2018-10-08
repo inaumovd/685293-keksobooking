@@ -15,8 +15,8 @@
     pictures.forEach(function (item) {
       var img = document.createElement('img');
       img.src = item;
-      img.width = 45;
-      img.height = 40;
+      img.width = CARD_PICTURES_WIDTH;
+      img.height = CARD_PICTURES_HEIGHT;
       img.alt = 'Фотография жилья';
       img.classList.add('popup__photo');
       fragment.appendChild(img);
