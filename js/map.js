@@ -99,8 +99,4 @@
 
   deactivatePage();
 
-  window.map = {
-    deactivatePage: deactivatePage,
-  };
-
 })();

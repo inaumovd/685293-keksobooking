@@ -99,14 +99,14 @@
   timeOut.addEventListener('change', onTimeOutChange);
 
   adForm.addEventListener('submit', function (evt) {
-    window.backend.send(new FormData(adForm), onLoad, onError);
     evt.preventDefault();
+    window.backend.send(new FormData(adForm), onLoad, onError);
   });
 
   resetFormButton.addEventListener('click', function (evt) {
+    evt.preventDefault();
     window.adCard.closeAd();
     window.map.deactivatePage();
-    evt.preventDefault();
   });
 
   window.form = {
