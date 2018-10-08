@@ -1,7 +1,8 @@
 'use strict';
 
 (function () {
-
+  var CARD_PICTURES_WIDTH = 45;
+  var CARD_PICTURES_HEIGHT = 40;
   var currentAd;
   var map = document.querySelector('.map');
   var mapFilters = document.querySelector('.map__filters-container');
