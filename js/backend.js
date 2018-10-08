@@ -4,10 +4,13 @@
 
   var URL_LOAD = 'https://js.dump.academy/keksobooking/data';
   var URL_SEND = 'https://js.dump.academy/keksobooking';
-  var SUCCESS_CODE = 200;
-  var ERROR_REQUEST_CODE = 400;
-  var ERROR_NOT_FOUND_CODE = 404;
-  var ERROR_SERVER_CODE = 500;
+
+  var Code = {
+    SUCCESS: 200,
+    ERROR_REQUEST: 400,
+    NOT_FOUND: 404,
+    ERROR_SERVER: 500
+  };
 
   var createXHR = function (onLoad, onError) {
     var xhr = new XMLHttpRequest();
@@ -15,16 +18,16 @@
     xhr.timeout = 10000;
     xhr.addEventListener('load', function () {
       switch (xhr.status) {
-        case SUCCESS_CODE:
+        case Code.SUCCESS:
           onLoad(xhr.response);
           break;
-        case ERROR_REQUEST_CODE:
+        case Code.ERROR_REQUEST:
           onError('Ошибка запроса');
           break;
-        case ERROR_NOT_FOUND_CODE:
+        case Code.ERROR_NOT_FOUND:
           onError('Не найдено');
           break;
-        case ERROR_SERVER_CODE:
+        case Code.ERROR_SERVER:
           onError('Внутренняя ошибка сервера');
           break;
         default:

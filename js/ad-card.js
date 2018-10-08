@@ -1,8 +1,7 @@
 'use strict';
 
 (function () {
-  var CARD_PICTURES_WIDTH = 45;
-  var CARD_PICTURES_HEIGHT = 40;
+
   var currentAd;
   var map = document.querySelector('.map');
   var mapFilters = document.querySelector('.map__filters-container');
@@ -12,13 +11,10 @@
 
   var getPictures = function (pictures) {
     var fragment = document.createDocumentFragment();
+    var imageTemplate = mapAdTemplate.querySelector('.popup__photo');
     pictures.forEach(function (item) {
-      var img = document.createElement('img');
+      var img = imageTemplate.cloneNode(true);
       img.src = item;
-      img.width = CARD_PICTURES_WIDTH;
-      img.height = CARD_PICTURES_HEIGHT;
-      img.alt = 'Фотография жилья';
-      img.classList.add('popup__photo');
       fragment.appendChild(img);
     });
     return fragment;
