@@ -11,13 +11,10 @@
 
   var getPictures = function (pictures) {
     var fragment = document.createDocumentFragment();
+    var imageTemplate = mapAdTemplate.querySelector('.popup__photo');
     pictures.forEach(function (item) {
-      var img = document.createElement('img');
+      var img = imageTemplate.cloneNode(true);
       img.src = item;
-      img.width = 45;
-      img.height = 40;
-      img.alt = 'Фотография жилья';
-      img.classList.add('popup__photo');
       fragment.appendChild(img);
     });
     return fragment;

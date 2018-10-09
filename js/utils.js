@@ -16,7 +16,7 @@
     return Math.random() - 0.5;
   };
 
-  function debounce(func, wait, immediate) {
+  var debounce = function (func, wait, immediate) {
     var timeout;
     return function () {
       var args = arguments;
@@ -33,7 +33,7 @@
         func.apply(debounce(), args);
       }
     };
-  }
+  };
 
   var setDisabled = function (data, bool) {
     for (var i = 0; i < data.length; i++) {

@@ -21,8 +21,8 @@
   var activate = function () {
     adForm.classList.remove('ad-form--disabled');
     window.utils.setDisabled(adFormFieldsets, false);
-    capacitySelect.value = '1';
     updateCapacity();
+    updatePrice();
   };
 
   var deactivate = function () {
@@ -55,13 +55,17 @@
     capacitySelect.setCustomValidity(errorMessage);
   };
 
-  var onTypeSelectChange = function () {
+  var updatePrice = function () {
     switch (typeSelect.value) {
       case 'bungalo': priceInput.setAttribute('min', '0'); priceInput.placeholder = '0'; break;
       case 'flat': priceInput.setAttribute('min', '1000'); priceInput.placeholder = '1000'; break;
       case 'house': priceInput.setAttribute('min', '5000'); priceInput.placeholder = '5000'; break;
       case 'palace': priceInput.setAttribute('min', '10000'); priceInput.placeholder = '10000'; break;
     }
+  };
+
+  var onTypeSelectChange = function () {
+    updatePrice();
   };
 
   var onTimeInChange = function () {
@@ -89,6 +93,10 @@
     updateCapacity();
   });
 
+  capacitySelect.addEventListener('change', function () {
+    updateCapacity();
+  });
+
   typeSelect.addEventListener('change', onTypeSelectChange);
 
   timeIn.addEventListener('change', onTimeInChange);
@@ -96,11 +104,12 @@
   timeOut.addEventListener('change', onTimeOutChange);
 
   adForm.addEventListener('submit', function (evt) {
-    window.backend.send(new FormData(adForm), onLoad, onError);
     evt.preventDefault();
+    window.backend.send(new FormData(adForm), onLoad, onError);
   });
 
-  resetFormButton.addEventListener('click', function () {
+  resetFormButton.addEventListener('click', function (evt) {
+    evt.preventDefault();
     window.adCard.closeAd();
     window.map.deactivatePage();
   });

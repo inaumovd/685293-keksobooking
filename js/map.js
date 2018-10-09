@@ -35,7 +35,7 @@
   };
 
   var getMainPinCoordinate = function () {
-    var x = mainPin.offsetLeft + MAIN_PIN_WIDTH / 2;
+    var x = Math.round(mainPin.offsetLeft + MAIN_PIN_WIDTH / 2);
     var y = mainPin.offsetTop + MAIN_PIN_HEIGHT;
     return x + ',' + y;
   };
